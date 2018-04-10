@@ -1,0 +1,31 @@
+{
+  "name": "mini-parallax",
+  "moduleName": "MiniParallax",
+  "version": "0.0.0",
+  "description": "Parallax library",
+  "main": "dist/mini-parallax.es.js",
+  "unpkg": "dist/mini-parallax.iife.min.js",
+  "scripts": {
+    "build": "bili"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://ko-yelie@github.com/ko-yelie/mini-parallax.git"
+  },
+  "keywords": [],
+  "author": "Ko.Yelie",
+  "license": "MIT",
+  "year": 2018,
+  "bugs": {
+    "url": "https://github.com/ko-yelie/mini-parallax/issues"
+  },
+  "homepage": "https://github.com/ko-yelie/mini-parallax#readme",
+  "devDependencies": {
+    "banner-package": "0.0.2",
+    "bili": "^3.0.15"
+  },
+  "dependencies": {
+    "get-elements-array": "^1.0.1",
+    "noop-es2015": "^1.0.1"
+  }
+}

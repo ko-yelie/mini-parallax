@@ -1,0 +1,2 @@
+# mini-parallax
+Parallax library

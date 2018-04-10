@@ -12,7 +12,10 @@
     "type": "git",
     "url": "git+https://ko-yelie@github.com/ko-yelie/mini-parallax.git"
   },
-  "keywords": [],
+  "keywords": [
+    "parallax",
+    "background"
+  ],
   "author": "Ko.Yelie",
   "license": "MIT",
   "year": 2018,

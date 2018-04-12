@@ -5,7 +5,7 @@ Parallax library
 import MiniParallax from 'mini-parallax'
 
 new MiniParallax('.js-parallax', {
-  speed: 0.03
+  speed: 0.1
 })
 ```
 
@@ -17,6 +17,12 @@ new MiniParallax('.js-parallax', {
 })
 ```
 
+---
+
 ```html
 <script src="https://unpkg.com/mini-parallax"></script>
+```
+
+```js
+new MiniParallax('.js-parallax')
 ```

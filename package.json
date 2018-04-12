@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/ko-yelie/mini-parallax#readme",
   "devDependencies": {
-    "banner-package": "0.0.2",
+    "banner-package": "^0.1.0",
     "bili": "^3.0.15"
   },
   "dependencies": {

@@ -1,8 +1,6 @@
-const banner = require('banner-package')
-
 module.exports = {
   format: ['es', 'iife', 'iife-min'],
-  banner,
+  banner: require('banner-package'),
   js: 'buble',
   map: false
 }

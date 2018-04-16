@@ -8,6 +8,18 @@ import ParallaxBase from './ParallaxBase'
  */
 export default class BackgroundParallax extends ParallaxBase {
   /**
+   * @param {string|NodeList|Element|Element[]} target - パララックス対象要素
+   * @param {Object} options
+   * @param {function} [options.onResize=noop] - ウィンドウリサイズ時に実行する関数
+   * @param {function} [options.onScroll=noop] - スクロール時に実行する関数
+   * @param {boolean} [options.isRound=false] - transform の style 値を丸めるかどうか
+   * @param {boolean} [options.autoRun=true] - 自動実行するかどうか
+   */
+  constructor (target, options) {
+    super(target, options)
+  }
+
+  /**
    * 各要素のポジションをキャッシュする
    */
   cacheElementPos (el, scrollY) {

@@ -312,6 +312,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/backgroundparallax.js~backgroundparallax#constructor",
+    "class/src/BackgroundParallax.js~BackgroundParallax.html#instance-constructor-constructor",
+    "src/BackgroundParallax.js~BackgroundParallax#constructor",
+    "method"
+  ],
+  [
     "src/backgroundparallax.js~backgroundparallax#updateelement",
     "class/src/BackgroundParallax.js~BackgroundParallax.html#instance-method-updateElement",
     "src/BackgroundParallax.js~BackgroundParallax#updateElement",

@@ -567,7 +567,7 @@
     "__docId__": 48,
     "kind": "file",
     "name": "src/BackgroundParallax.js",
-    "content": "import ParallaxBase from './ParallaxBase'\n\n/**\n * Automatically calculate the moving distance from the height of the parent element\n *\n * @example\n * new BackgroundParallax('.js-parallax')\n */\nexport default class BackgroundParallax extends ParallaxBase {\n  /**\n   * 各要素のポジションをキャッシュする\n   */\n  cacheElementPos (el, scrollY) {\n    const bounding = el.getBoundingClientRect()\n    const boundingParent = el.parentNode.getBoundingClientRect()\n    const top = boundingParent.top + scrollY\n    const inPos = top - this.windowHeight\n    const outPos = boundingParent.bottom + scrollY\n\n    return {\n      el,\n      max: boundingParent.height - bounding.height,\n      inPos,\n      outPos,\n      distance: outPos - inPos,\n      offset: boundingParent.top - bounding.top\n    }\n  }\n\n  /**\n   * 各要素のポジション更新\n   */\n  updateElement (item) {\n    if (this.scrollTop > item.outPos) {\n      // アイテムが上の方に見えなくなった後\n    } else {\n      const diff = this.scrollTop - item.inPos\n      if (diff > 0) {\n        // アイテムが下から見えた後\n        const rate = diff / item.distance\n        const position = item.offset + item.max - item.max * rate // 最大値 - (最大値 - 最小値) * rate\n\n        item.el.style.transform = this[this.getTransformValueFuncName](position)\n      }\n    }\n  }\n}\n",
+    "content": "import ParallaxBase from './ParallaxBase'\n\n/**\n * Automatically calculate the moving distance from the height of the parent element\n *\n * @example\n * new BackgroundParallax('.js-parallax')\n */\nexport default class BackgroundParallax extends ParallaxBase {\n  /**\n   * @param {string|NodeList|Element|Element[]} target - パララックス対象要素\n   * @param {Object} options\n   * @param {function} [options.onResize=noop] - ウィンドウリサイズ時に実行する関数\n   * @param {function} [options.onScroll=noop] - スクロール時に実行する関数\n   * @param {boolean} [options.isRound=false] - transform の style 値を丸めるかどうか\n   * @param {boolean} [options.autoRun=true] - 自動実行するかどうか\n   */\n  constructor (target, options) {\n    super(target, options)\n  }\n\n  /**\n   * 各要素のポジションをキャッシュする\n   */\n  cacheElementPos (el, scrollY) {\n    const bounding = el.getBoundingClientRect()\n    const boundingParent = el.parentNode.getBoundingClientRect()\n    const top = boundingParent.top + scrollY\n    const inPos = top - this.windowHeight\n    const outPos = boundingParent.bottom + scrollY\n\n    return {\n      el,\n      max: boundingParent.height - bounding.height,\n      inPos,\n      outPos,\n      distance: outPos - inPos,\n      offset: boundingParent.top - bounding.top\n    }\n  }\n\n  /**\n   * 各要素のポジション更新\n   */\n  updateElement (item) {\n    if (this.scrollTop > item.outPos) {\n      // アイテムが上の方に見えなくなった後\n    } else {\n      const diff = this.scrollTop - item.inPos\n      if (diff > 0) {\n        // アイテムが下から見えた後\n        const rate = diff / item.distance\n        const position = item.offset + item.max - item.max * rate // 最大値 - (最大値 - 最小値) * rate\n\n        item.el.style.transform = this[this.getTransformValueFuncName](position)\n      }\n    }\n  }\n}\n",
     "static": true,
     "longname": "/Users/koya.iwasaki/web/mini-parallax/src/BackgroundParallax.js",
     "access": "public",
@@ -597,6 +597,92 @@
   },
   {
     "__docId__": 50,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/BackgroundParallax.js~BackgroundParallax",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/BackgroundParallax.js~BackgroundParallax#constructor",
+    "access": "public",
+    "description": "",
+    "lineNumber": 18,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string",
+          "NodeList",
+          "Element",
+          "Element[]"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "target",
+        "description": "パララックス対象要素"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "function"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "noop",
+        "defaultRaw": "noop",
+        "name": "options.onResize",
+        "description": "ウィンドウリサイズ時に実行する関数"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "function"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "noop",
+        "defaultRaw": "noop",
+        "name": "options.onScroll",
+        "description": "スクロール時に実行する関数"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "boolean"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "false",
+        "defaultRaw": false,
+        "name": "options.isRound",
+        "description": "transform の style 値を丸めるかどうか"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "boolean"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "true",
+        "defaultRaw": true,
+        "name": "options.autoRun",
+        "description": "自動実行するかどうか"
+      }
+    ]
+  },
+  {
+    "__docId__": 51,
     "kind": "method",
     "name": "cacheElementPos",
     "memberof": "src/BackgroundParallax.js~BackgroundParallax",
@@ -606,7 +692,7 @@
     "longname": "src/BackgroundParallax.js~BackgroundParallax#cacheElementPos",
     "access": "public",
     "description": "各要素のポジションをキャッシュする",
-    "lineNumber": 13,
+    "lineNumber": 25,
     "params": [
       {
         "name": "el",
@@ -628,7 +714,7 @@
     }
   },
   {
-    "__docId__": 51,
+    "__docId__": 52,
     "kind": "method",
     "name": "updateElement",
     "memberof": "src/BackgroundParallax.js~BackgroundParallax",
@@ -638,7 +724,7 @@
     "longname": "src/BackgroundParallax.js~BackgroundParallax#updateElement",
     "access": "public",
     "description": "各要素のポジション更新",
-    "lineNumber": 33,
+    "lineNumber": 45,
     "params": [
       {
         "name": "item",
@@ -650,7 +736,7 @@
     "return": null
   },
   {
-    "__docId__": 52,
+    "__docId__": 53,
     "kind": "file",
     "name": "src/NormalParallax.js",
     "content": "import noop from 'noop-es2015'\nimport ParallaxBase from './ParallaxBase'\n\n/**\n * パララックス\n *\n * @example\n * new NormalParallax('.js-parallax', {\n *   speed: 0.03\n * })\n */\nexport default class NormalParallax extends ParallaxBase {\n  /**\n   * @param {string|NodeList|Element|Element[]} target - パララックス対象要素\n   * @param {Object} options\n   * @param {function} [options.onResize=noop] - ウィンドウリサイズ時に実行する関数\n   * @param {function} [options.onScroll=noop] - スクロール時に実行する関数\n   * @param {boolean} [options.isRound=false] - transform の style 値を丸めるかどうか\n   * @param {boolean} [options.autoRun=true] - 自動実行するかどうか\n   * @param {number} [options.speed=0.1] - 移動スピード（-∞ 〜 ∞）\n   * @param {number} [options.speedSp=options.speed] - SP 表示での移動スピード（デフォルトは PC と同じ）\n   * @param {function} [options.isSP=noop] - SP表示かどうかを判別する関数\n   */\n  constructor (target, options = {}) {\n    const {\n      speed = 0.1,\n      speedSp = speed,\n      isSP = noop,\n      autoRun = true\n    } = options\n\n    options.autoRun = false\n    super(target, options)\n\n    this.speedPc = speed\n    this.speedSp = speedSp\n    this.isSP = isSP\n\n    autoRun && this.run()\n  }\n\n  /**\n   * 各種値をキャッシュする\n   */\n  cache () {\n    this.isSpCurrent = this.isSP()\n    this.speed = this.isSpCurrent ? this.speedSp : this.speedPc\n    this.speed *= window.innerWidth / window.innerHeight\n\n    super.cache()\n  }\n\n  /**\n   * 各要素のポジションをキャッシュする\n   */\n  cacheElementPos (el, scrollY) {\n    // SP 無効指定ならパララックスさせない\n    if (this.isSpCurrent && el.dataset.sp === 'false') return\n\n    const bounding = el.getBoundingClientRect()\n    const top = bounding.top + scrollY\n\n    return {\n      el,\n      top,\n      center: top + bounding.height / 2,\n      speed: parseFloat(el.dataset.speed, 10) || this.speed,\n      inPos: top - this.windowHeight,\n      outPos: bounding.bottom + scrollY\n    }\n  }\n\n  /**\n   * 更新\n   */\n  update () {\n    this.centerViewport = this.scrollTop + this.windowHeight / 2\n\n    super.update()\n  }\n\n  /**\n   * 各要素のポジション更新\n   */\n  updateElement (item) {\n    if (this.scrollTop > item.outPos) {\n      // アイテムが上の方に見えなくなった後\n    } else if (this.scrollTop > item.inPos) {\n      // アイテムが下から見えた後\n      const position =\n        (item.center - this.centerViewport) * item.speed\n      item.el.style.transform = this[this.getTransformValueFuncName](position)\n    }\n  }\n}\n",
@@ -661,7 +747,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 53,
+    "__docId__": 54,
     "kind": "class",
     "name": "NormalParallax",
     "memberof": "src/NormalParallax.js",
@@ -682,7 +768,7 @@
     ]
   },
   {
-    "__docId__": 54,
+    "__docId__": 55,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/NormalParallax.js~NormalParallax",
@@ -804,7 +890,7 @@
     ]
   },
   {
-    "__docId__": 55,
+    "__docId__": 56,
     "kind": "member",
     "name": "speedPc",
     "memberof": "src/NormalParallax.js~NormalParallax",
@@ -821,7 +907,7 @@
     }
   },
   {
-    "__docId__": 56,
+    "__docId__": 57,
     "kind": "member",
     "name": "speedSp",
     "memberof": "src/NormalParallax.js~NormalParallax",
@@ -838,7 +924,7 @@
     }
   },
   {
-    "__docId__": 57,
+    "__docId__": 58,
     "kind": "member",
     "name": "isSP",
     "memberof": "src/NormalParallax.js~NormalParallax",
@@ -855,7 +941,7 @@
     }
   },
   {
-    "__docId__": 58,
+    "__docId__": 59,
     "kind": "method",
     "name": "cache",
     "memberof": "src/NormalParallax.js~NormalParallax",
@@ -870,7 +956,7 @@
     "return": null
   },
   {
-    "__docId__": 59,
+    "__docId__": 60,
     "kind": "member",
     "name": "isSpCurrent",
     "memberof": "src/NormalParallax.js~NormalParallax",
@@ -887,7 +973,7 @@
     }
   },
   {
-    "__docId__": 60,
+    "__docId__": 61,
     "kind": "member",
     "name": "speed",
     "memberof": "src/NormalParallax.js~NormalParallax",
@@ -904,7 +990,7 @@
     }
   },
   {
-    "__docId__": 62,
+    "__docId__": 63,
     "kind": "method",
     "name": "cacheElementPos",
     "memberof": "src/NormalParallax.js~NormalParallax",
@@ -936,7 +1022,7 @@
     }
   },
   {
-    "__docId__": 63,
+    "__docId__": 64,
     "kind": "method",
     "name": "update",
     "memberof": "src/NormalParallax.js~NormalParallax",
@@ -951,7 +1037,7 @@
     "return": null
   },
   {
-    "__docId__": 64,
+    "__docId__": 65,
     "kind": "member",
     "name": "centerViewport",
     "memberof": "src/NormalParallax.js~NormalParallax",
@@ -968,7 +1054,7 @@
     }
   },
   {
-    "__docId__": 65,
+    "__docId__": 66,
     "kind": "method",
     "name": "updateElement",
     "memberof": "src/NormalParallax.js~NormalParallax",
@@ -990,7 +1076,7 @@
     "return": null
   },
   {
-    "__docId__": 66,
+    "__docId__": 67,
     "kind": "file",
     "name": "src/ParallaxBase.js",
     "content": "import noop from 'noop-es2015'\nimport getElements from 'get-elements-array'\n\n/**\n * パララックス共通機能\n */\nexport default class ParallaxBase {\n  /**\n   * @param {string|NodeList|Element|Element[]} target - パララックス対象要素\n   * @param {Object} options\n   * @param {function} [options.onResize=noop] - ウィンドウリサイズ時に実行する関数\n   * @param {function} [options.onScroll=noop] - スクロール時に実行する関数\n   * @param {boolean} [options.isRound=false] - transform の style 値を丸めるかどうか\n   * @param {boolean} [options.autoRun=true] - 自動実行するかどうか\n   */\n  constructor (target, options = {}) {\n    const {\n      onResize = noop,\n      onScroll = noop,\n      isRound = false,\n      autoRun = true\n    } = options\n\n    this.els = getElements(target)\n    this.onResize = onResize\n    this.onScroll = onScroll\n    this.getTransformValueFuncName = `getTransformValue${isRound ? 'Round' : ''}`\n    this.scrollTarget = document.scrollingElement || document.documentElement\n\n    window.addEventListener('resize', () => this.cache())\n\n    autoRun && this.run()\n  }\n\n  /**\n   * アニメーション開始\n   */\n  run () {\n    this.cache()\n    requestAnimationFrame(() => this.tick())\n  }\n\n  /**\n   * 各種値をキャッシュする\n   */\n  cache () {\n    this.windowHeight = window.innerHeight\n    const scrollY = window.scrollY // 現在のスクロール位置\n\n    this.items = this.els\n      .map(el => {\n        el.style.transform = 'none'\n\n        return this.cacheElementPos(el, scrollY)\n      })\n      .filter(item => item)\n\n    this.onResize(this.windowHeight)\n  }\n\n  /**\n   * アニメーションの各フレーム\n   */\n  tick () {\n    const scrollTop = this.scrollTarget.scrollTop\n    if (scrollTop !== this.scrollTop) {\n      // スクロール位置が変更したとき\n      this.scrollTop = scrollTop\n      this.update()\n    }\n\n    requestAnimationFrame(() => this.tick())\n  }\n\n  /**\n   * 更新\n   */\n  update () {\n    this.items.forEach(item => this.updateElement(item))\n\n    this.onScroll(this.scrollTop)\n  }\n\n  /**\n   * transform の style 値を返す\n   */\n  getTransformValue (position) {\n    return `translate3d(0, ${position}px, 0)`\n  }\n\n  /**\n   * transform の style 値を返す\n   * にじみなどの問題を避けるため、座標は整数値に変換する\n   */\n  getTransformValueRound (position) {\n    return `translate3d(0, ${Math.round(position)}px, 0)`\n  }\n}\n",
@@ -1001,7 +1087,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 67,
+    "__docId__": 68,
     "kind": "class",
     "name": "ParallaxBase",
     "memberof": "src/ParallaxBase.js",
@@ -1016,7 +1102,7 @@
     "interface": false
   },
   {
-    "__docId__": 68,
+    "__docId__": 69,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/ParallaxBase.js~ParallaxBase",
@@ -1102,7 +1188,7 @@
     ]
   },
   {
-    "__docId__": 69,
+    "__docId__": 70,
     "kind": "member",
     "name": "els",
     "memberof": "src/ParallaxBase.js~ParallaxBase",
@@ -1119,7 +1205,7 @@
     }
   },
   {
-    "__docId__": 70,
+    "__docId__": 71,
     "kind": "member",
     "name": "onResize",
     "memberof": "src/ParallaxBase.js~ParallaxBase",
@@ -1136,7 +1222,7 @@
     }
   },
   {
-    "__docId__": 71,
+    "__docId__": 72,
     "kind": "member",
     "name": "onScroll",
     "memberof": "src/ParallaxBase.js~ParallaxBase",
@@ -1153,7 +1239,7 @@
     }
   },
   {
-    "__docId__": 72,
+    "__docId__": 73,
     "kind": "member",
     "name": "getTransformValueFuncName",
     "memberof": "src/ParallaxBase.js~ParallaxBase",
@@ -1170,7 +1256,7 @@
     }
   },
   {
-    "__docId__": 73,
+    "__docId__": 74,
     "kind": "member",
     "name": "scrollTarget",
     "memberof": "src/ParallaxBase.js~ParallaxBase",
@@ -1187,7 +1273,7 @@
     }
   },
   {
-    "__docId__": 74,
+    "__docId__": 75,
     "kind": "method",
     "name": "run",
     "memberof": "src/ParallaxBase.js~ParallaxBase",
@@ -1202,7 +1288,7 @@
     "return": null
   },
   {
-    "__docId__": 75,
+    "__docId__": 76,
     "kind": "method",
     "name": "cache",
     "memberof": "src/ParallaxBase.js~ParallaxBase",
@@ -1217,7 +1303,7 @@
     "return": null
   },
   {
-    "__docId__": 76,
+    "__docId__": 77,
     "kind": "member",
     "name": "windowHeight",
     "memberof": "src/ParallaxBase.js~ParallaxBase",
@@ -1234,7 +1320,7 @@
     }
   },
   {
-    "__docId__": 77,
+    "__docId__": 78,
     "kind": "member",
     "name": "items",
     "memberof": "src/ParallaxBase.js~ParallaxBase",
@@ -1251,7 +1337,7 @@
     }
   },
   {
-    "__docId__": 78,
+    "__docId__": 79,
     "kind": "method",
     "name": "tick",
     "memberof": "src/ParallaxBase.js~ParallaxBase",
@@ -1266,7 +1352,7 @@
     "return": null
   },
   {
-    "__docId__": 79,
+    "__docId__": 80,
     "kind": "member",
     "name": "scrollTop",
     "memberof": "src/ParallaxBase.js~ParallaxBase",
@@ -1283,7 +1369,7 @@
     }
   },
   {
-    "__docId__": 80,
+    "__docId__": 81,
     "kind": "method",
     "name": "update",
     "memberof": "src/ParallaxBase.js~ParallaxBase",
@@ -1298,7 +1384,7 @@
     "return": null
   },
   {
-    "__docId__": 81,
+    "__docId__": 82,
     "kind": "method",
     "name": "getTransformValue",
     "memberof": "src/ParallaxBase.js~ParallaxBase",
@@ -1324,7 +1410,7 @@
     }
   },
   {
-    "__docId__": 82,
+    "__docId__": 83,
     "kind": "method",
     "name": "getTransformValueRound",
     "memberof": "src/ParallaxBase.js~ParallaxBase",
@@ -1350,7 +1436,7 @@
     }
   },
   {
-    "__docId__": 83,
+    "__docId__": 84,
     "kind": "file",
     "name": "src/index.js",
     "content": "export { default as NormalParallax } from './NormalParallax'\nexport { default as BackgroundParallax } from './BackgroundParallax'\n",
@@ -1370,7 +1456,7 @@
   },
   {
     "kind": "packageJSON",
-    "content": "{\n  \"name\": \"mini-parallax\",\n  \"moduleName\": \"MiniParallax\",\n  \"version\": \"0.1.1\",\n  \"description\": \"Parallax library\",\n  \"main\": \"dist/mini-parallax.es.js\",\n  \"unpkg\": \"dist/mini-parallax.iife.min.js\",\n  \"scripts\": {\n    \"build\": \"bili\",\n    \"docs\": \"esdoc\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://ko-yelie@github.com/ko-yelie/mini-parallax.git\"\n  },\n  \"keywords\": [\n    \"parallax\",\n    \"background\"\n  ],\n  \"author\": \"Ko.Yelie\",\n  \"license\": \"MIT\",\n  \"year\": 2018,\n  \"bugs\": {\n    \"url\": \"https://github.com/ko-yelie/mini-parallax/issues\"\n  },\n  \"homepage\": \"https://github.com/ko-yelie/mini-parallax#readme\",\n  \"devDependencies\": {\n    \"banner-package\": \"^0.1.0\",\n    \"bili\": \"^3.0.15\",\n    \"esdoc\": \"^1.0.4\",\n    \"esdoc-standard-plugin\": \"^1.0.0\"\n  },\n  \"dependencies\": {\n    \"get-elements-array\": \"^1.0.1\",\n    \"noop-es2015\": \"^1.0.1\"\n  }\n}\n",
+    "content": "{\n  \"name\": \"mini-parallax\",\n  \"moduleName\": \"MiniParallax\",\n  \"version\": \"0.2.0\",\n  \"description\": \"Parallax library\",\n  \"main\": \"dist/mini-parallax.es.js\",\n  \"unpkg\": \"dist/mini-parallax.iife.min.js\",\n  \"scripts\": {\n    \"build\": \"bili\",\n    \"docs\": \"esdoc\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://ko-yelie@github.com/ko-yelie/mini-parallax.git\"\n  },\n  \"keywords\": [\n    \"parallax\",\n    \"background\"\n  ],\n  \"author\": \"Ko.Yelie\",\n  \"license\": \"MIT\",\n  \"year\": 2018,\n  \"bugs\": {\n    \"url\": \"https://github.com/ko-yelie/mini-parallax/issues\"\n  },\n  \"homepage\": \"https://github.com/ko-yelie/mini-parallax#readme\",\n  \"devDependencies\": {\n    \"banner-package\": \"^0.1.0\",\n    \"bili\": \"^3.0.15\",\n    \"esdoc\": \"^1.0.4\",\n    \"esdoc-standard-plugin\": \"^1.0.0\"\n  },\n  \"dependencies\": {\n    \"get-elements-array\": \"^1.0.1\",\n    \"noop-es2015\": \"^1.0.1\"\n  }\n}\n",
     "longname": "/Users/koya.iwasaki/web/mini-parallax/package.json",
     "name": "package.json",
     "static": true,

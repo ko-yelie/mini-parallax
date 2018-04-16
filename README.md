@@ -2,27 +2,44 @@
 Parallax library
 
 ```js
-import MiniParallax from 'mini-parallax'
+import { NormalParallax } from 'mini-parallax'
 
-new MiniParallax('.js-parallax', {
-  speed: 0.1
-})
+new NormalParallax('.js-parallax')
 ```
 
-```js
-import MiniParallax from 'mini-parallax'
+```html
+<div class="js-parallax"></div>
 
-new MiniParallax('.js-parallax', {
-  isBackground: true
-})
+<!-- Set speed only for this element -->
+<div class="js-parallax" data-speed="0.03"></div>
 ```
 
 ---
+
+Automatically calculate the moving distance from the height of the parent element
+
+```js
+import { BackgroundParallax } from 'mini-parallax'
+
+new BackgroundParallax('.js-parallax')
+```
+
+```html
+<div class="parent">
+  <div class="js-parallax"></div>
+</div>
+```
+
+---
+
+CDN
 
 ```html
 <script src="https://unpkg.com/mini-parallax"></script>
 ```
 
 ```js
-new MiniParallax('.js-parallax')
+const { NormalParallax } = MiniParallax
+
+new NormalParallax('.js-parallax')
 ```

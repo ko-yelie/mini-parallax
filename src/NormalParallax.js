@@ -71,6 +71,15 @@ export default class NormalParallax extends ParallaxBase {
   }
 
   /**
+   * 更新
+   */
+  update () {
+    this.centerViewport = this.scrollTop + this.windowHeight / 2
+
+    super.update()
+  }
+
+  /**
    * 各要素のポジション更新
    */
   updateElement (item) {
@@ -79,7 +88,7 @@ export default class NormalParallax extends ParallaxBase {
     } else if (this.scrollTop > item.inPos) {
       // アイテムが下から見えた後
       const position =
-        (item.center - (this.scrollTop + this.windowHeight / 2)) * item.speed
+        (item.center - this.centerViewport) * item.speed
       item.el.style.transform = this[this.getTransformValueFuncName](position)
     }
   }

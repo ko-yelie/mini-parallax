@@ -5,6 +5,9 @@
   "description": "Parallax library",
   "main": "dist/mini-parallax.es.js",
   "unpkg": "dist/mini-parallax.iife.min.js",
+  "files": [
+    "dist/"
+  ],
   "scripts": {
     "build": "bili",
     "docs": "esdoc"

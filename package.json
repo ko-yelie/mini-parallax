@@ -6,7 +6,7 @@
   "main": "dist/mini-parallax.es.js",
   "unpkg": "dist/mini-parallax.iife.min.js",
   "scripts": {
-    "build": "bili"
+    "build": "bili && bili --config 'bili.config.background.js'"
   },
   "repository": {
     "type": "git",

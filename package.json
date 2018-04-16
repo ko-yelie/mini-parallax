@@ -6,7 +6,8 @@
   "main": "dist/mini-parallax.es.js",
   "unpkg": "dist/mini-parallax.iife.min.js",
   "scripts": {
-    "build": "bili"
+    "build": "bili",
+    "docs": "esdoc"
   },
   "repository": {
     "type": "git",
@@ -25,7 +26,9 @@
   "homepage": "https://github.com/ko-yelie/mini-parallax#readme",
   "devDependencies": {
     "banner-package": "^0.1.0",
-    "bili": "^3.0.15"
+    "bili": "^3.0.15",
+    "esdoc": "^1.0.4",
+    "esdoc-standard-plugin": "^1.0.0"
   },
   "dependencies": {
     "get-elements-array": "^1.0.1",

@@ -4,14 +4,16 @@ Parallax library
 ```js
 import { NormalParallax } from 'mini-parallax'
 
-new NormalParallax('.js-parallax')
+new NormalParallax('.js-parallax', {
+  speed: 0.03
+})
 ```
 
 ```html
 <div class="js-parallax"></div>
 
 <!-- Set speed only for this element -->
-<div class="js-parallax" data-speed="0.03"></div>
+<div class="js-parallax" data-speed="0.05"></div>
 ```
 
 ---

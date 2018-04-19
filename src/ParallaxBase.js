@@ -21,13 +21,13 @@ export default class ParallaxBase {
       autoRun = true
     } = options
 
-    this.els = getElements(target)
-    this.onResize = onResize
-    this.onScroll = onScroll
-    this.getTransformValueFuncName = `getTransformValue${isRound ? 'Round' : ''}`
-    this.scrollTarget = document.scrollingElement || document.documentElement
+    this._els = getElements(target)
+    this._onResize = onResize
+    this._onScroll = onScroll
+    this._getTransformValueFuncName = `_getTransformValue${isRound ? 'Round' : ''}`
+    this._scrollTarget = document.scrollingElement || document.documentElement
 
-    window.addEventListener('resize', () => this.cache())
+    window.addEventListener('resize', () => this._cache())
 
     autoRun && this.run()
   }
@@ -36,55 +36,55 @@ export default class ParallaxBase {
    * Run animation
    */
   run () {
-    this.cache()
-    requestAnimationFrame(() => this.tick())
+    this._cache()
+    requestAnimationFrame(() => this._tick())
   }
 
   /**
    * Cache various values
    */
-  cache () {
-    this.windowHeight = window.innerHeight
+  _cache () {
+    this._windowHeight = window.innerHeight
     const scrollY = window.scrollY
 
-    this.items = this.els
+    this._items = this._els
       .map(el => {
         el.style.transform = 'none'
 
-        return this.cacheElementPos(el, scrollY)
+        return this._cacheElementPos(el, scrollY)
       })
       .filter(item => item)
 
-    this.onResize(this.windowHeight)
+    this._onResize(this._windowHeight)
   }
 
   /**
    * Each frame of animation
    */
-  tick () {
-    const scrollTop = this.scrollTarget.scrollTop
-    if (scrollTop !== this.scrollTop) {
+  _tick () {
+    const scrollTop = this._scrollTarget.scrollTop
+    if (scrollTop !== this._scrollTop) {
       // When the scroll position changes
-      this.scrollTop = scrollTop
-      this.update()
+      this._scrollTop = scrollTop
+      this._update()
     }
 
-    requestAnimationFrame(() => this.tick())
+    requestAnimationFrame(() => this._tick())
   }
 
   /**
    * Update the position of each element
    */
-  update () {
-    this.items.forEach(item => this.updateElement(item))
+  _update () {
+    this._items.forEach(item => this._updateElement(item))
 
-    this.onScroll(this.scrollTop)
+    this._onScroll(this._scrollTop)
   }
 
   /**
    * Return the value of transform
    */
-  getTransformValue (position) {
+  _getTransformValue (position) {
     return `translate3d(0, ${position}px, 0)`
   }
 
@@ -92,7 +92,7 @@ export default class ParallaxBase {
    * Return the value of transform
    * In order to avoid problems such as bleeding, convert the number to an integers
    */
-  getTransformValueRound (position) {
+  _getTransformValueRound (position) {
     return `translate3d(0, ${Math.round(position)}px, 0)`
   }
 }

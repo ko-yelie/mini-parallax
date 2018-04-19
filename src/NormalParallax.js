@@ -32,9 +32,9 @@ export default class NormalParallax extends ParallaxBase {
     options.autoRun = false
     super(target, options)
 
-    this.speedPc = speed
-    this.speedSp = speedSp
-    this.isSP = isSP
+    this._speedPc = speed
+    this._speedSp = speedSp
+    this._isSP = isSP
 
     autoRun && this.run()
   }
@@ -42,20 +42,20 @@ export default class NormalParallax extends ParallaxBase {
   /**
    * Cache various values
    */
-  cache () {
-    this.isSpCurrent = this.isSP()
-    this.speed = this.isSpCurrent ? this.speedSp : this.speedPc
+  _cache () {
+    this._isSpCurrent = this._isSP()
+    this.speed = this._isSpCurrent ? this._speedSp : this._speedPc
     this.speed *= window.innerWidth / window.innerHeight
 
-    super.cache()
+    super._cache()
   }
 
   /**
    * Cache various values of one element
    */
-  cacheElementPos (el, scrollY) {
+  _cacheElementPos (el, scrollY) {
     // Do not parallax if it is specified to invalidate by SP
-    if (this.isSpCurrent && el.dataset.sp === 'false') return
+    if (this._isSpCurrent && el.dataset.sp === 'false') return
 
     const bounding = el.getBoundingClientRect()
     const top = bounding.top + scrollY
@@ -65,7 +65,7 @@ export default class NormalParallax extends ParallaxBase {
       top,
       center: top + bounding.height / 2,
       speed: parseFloat(el.dataset.speed, 10) || this.speed,
-      inPos: top - this.windowHeight,
+      inPos: top - this._windowHeight,
       outPos: bounding.bottom + scrollY
     }
   }
@@ -73,23 +73,23 @@ export default class NormalParallax extends ParallaxBase {
   /**
    * Update the position of each element
    */
-  update () {
-    this.centerViewport = this.scrollTop + this.windowHeight / 2
+  _update () {
+    this._centerViewport = this._scrollTop + this._windowHeight / 2
 
-    super.update()
+    super._update()
   }
 
   /**
    * Update the position of one element
    */
-  updateElement (item) {
-    if (this.scrollTop > item.outPos) {
+  _updateElement (item) {
+    if (this._scrollTop > item.outPos) {
       // After the element disappears in the upper direction
-    } else if (this.scrollTop > item.inPos) {
+    } else if (this._scrollTop > item.inPos) {
       // After the element can be seen from below
       const position =
-        (item.center - this.centerViewport) * item.speed
-      item.el.style.transform = this[this.getTransformValueFuncName](position)
+        (item.center - this._centerViewport) * item.speed
+      item.el.style.transform = this[this._getTransformValueFuncName](position)
     }
   }
 }

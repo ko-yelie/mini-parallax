@@ -22,11 +22,11 @@ export default class BackgroundParallax extends ParallaxBase {
   /**
    * Cache various values of one element
    */
-  cacheElementPos (el, scrollY) {
+  _cacheElementPos (el, scrollY) {
     const bounding = el.getBoundingClientRect()
     const boundingParent = el.parentNode.getBoundingClientRect()
     const top = boundingParent.top + scrollY
-    const inPos = top - this.windowHeight
+    const inPos = top - this._windowHeight
     const outPos = boundingParent.bottom + scrollY
 
     return {
@@ -42,17 +42,17 @@ export default class BackgroundParallax extends ParallaxBase {
   /**
    * Update the position of one element
    */
-  updateElement (item) {
-    if (this.scrollTop > item.outPos) {
+  _updateElement (item) {
+    if (this._scrollTop > item.outPos) {
       // After the element disappears in the upper direction
     } else {
-      const diff = this.scrollTop - item.inPos
+      const diff = this._scrollTop - item.inPos
       if (diff > 0) {
         // After the element can be seen from below
         const rate = diff / item.distance
         const position = item.offset + item.max - item.max * rate // max - (max - min) * rate
 
-        item.el.style.transform = this[this.getTransformValueFuncName](position)
+        item.el.style.transform = this[this._getTransformValueFuncName](position)
       }
     }
   }

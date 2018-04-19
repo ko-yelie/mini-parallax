@@ -1,7 +1,7 @@
 {
   "name": "mini-parallax",
   "moduleName": "MiniParallax",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Parallax library",
   "main": "dist/mini-parallax.es.js",
   "unpkg": "dist/mini-parallax.iife.min.js",

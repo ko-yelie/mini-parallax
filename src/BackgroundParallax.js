@@ -8,19 +8,19 @@ import ParallaxBase from './ParallaxBase'
  */
 export default class BackgroundParallax extends ParallaxBase {
   /**
-   * @param {string|NodeList|Element|Element[]} target - パララックス対象要素
+   * @param {string|NodeList|Element|Element[]} target - Target elements (selector or element object)
    * @param {Object} options
-   * @param {function} [options.onResize=noop] - ウィンドウリサイズ時に実行する関数
-   * @param {function} [options.onScroll=noop] - スクロール時に実行する関数
-   * @param {boolean} [options.isRound=false] - transform の style 値を丸めるかどうか
-   * @param {boolean} [options.autoRun=true] - 自動実行するかどうか
+   * @param {function} [options.onResize=noop] - Resize event handler
+   * @param {function} [options.onScroll=noop] - Scroll event handler
+   * @param {boolean} [options.isRound=false] - Whether transform style value is rounded or not
+   * @param {boolean} [options.autoRun=true] - Whether to run automatically
    */
   constructor (target, options) {
     super(target, options)
   }
 
   /**
-   * 各要素のポジションをキャッシュする
+   * Cache various values of one element
    */
   cacheElementPos (el, scrollY) {
     const bounding = el.getBoundingClientRect()
@@ -40,17 +40,17 @@ export default class BackgroundParallax extends ParallaxBase {
   }
 
   /**
-   * 各要素のポジション更新
+   * Update the position of one element
    */
   updateElement (item) {
     if (this.scrollTop > item.outPos) {
-      // アイテムが上の方に見えなくなった後
+      // After the element disappears in the upper direction
     } else {
       const diff = this.scrollTop - item.inPos
       if (diff > 0) {
-        // アイテムが下から見えた後
+        // After the element can be seen from below
         const rate = diff / item.distance
-        const position = item.offset + item.max - item.max * rate // 最大値 - (最大値 - 最小値) * rate
+        const position = item.offset + item.max - item.max * rate // max - (max - min) * rate
 
         item.el.style.transform = this[this.getTransformValueFuncName](position)
       }

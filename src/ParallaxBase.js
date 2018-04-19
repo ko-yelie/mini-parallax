@@ -2,16 +2,16 @@ import noop from 'noop-es2015'
 import getElements from 'get-elements-array'
 
 /**
- * パララックス共通機能
+ * Common function for parallax
  */
 export default class ParallaxBase {
   /**
-   * @param {string|NodeList|Element|Element[]} target - パララックス対象要素
+   * @param {string|NodeList|Element|Element[]} target - Target elements (selector or element object)
    * @param {Object} options
-   * @param {function} [options.onResize=noop] - ウィンドウリサイズ時に実行する関数
-   * @param {function} [options.onScroll=noop] - スクロール時に実行する関数
-   * @param {boolean} [options.isRound=false] - transform の style 値を丸めるかどうか
-   * @param {boolean} [options.autoRun=true] - 自動実行するかどうか
+   * @param {function} [options.onResize=noop] - Resize event handler
+   * @param {function} [options.onScroll=noop] - Scroll event handler
+   * @param {boolean} [options.isRound=false] - Whether transform style value is rounded or not
+   * @param {boolean} [options.autoRun=true] - Whether to run automatically
    */
   constructor (target, options = {}) {
     const {
@@ -33,7 +33,7 @@ export default class ParallaxBase {
   }
 
   /**
-   * アニメーション開始
+   * Run animation
    */
   run () {
     this.cache()
@@ -41,11 +41,11 @@ export default class ParallaxBase {
   }
 
   /**
-   * 各種値をキャッシュする
+   * Cache various values
    */
   cache () {
     this.windowHeight = window.innerHeight
-    const scrollY = window.scrollY // 現在のスクロール位置
+    const scrollY = window.scrollY
 
     this.items = this.els
       .map(el => {
@@ -59,12 +59,12 @@ export default class ParallaxBase {
   }
 
   /**
-   * アニメーションの各フレーム
+   * Each frame of animation
    */
   tick () {
     const scrollTop = this.scrollTarget.scrollTop
     if (scrollTop !== this.scrollTop) {
-      // スクロール位置が変更したとき
+      // When the scroll position changes
       this.scrollTop = scrollTop
       this.update()
     }
@@ -73,7 +73,7 @@ export default class ParallaxBase {
   }
 
   /**
-   * 更新
+   * Update the position of each element
    */
   update () {
     this.items.forEach(item => this.updateElement(item))
@@ -82,15 +82,15 @@ export default class ParallaxBase {
   }
 
   /**
-   * transform の style 値を返す
+   * Return the value of transform
    */
   getTransformValue (position) {
     return `translate3d(0, ${position}px, 0)`
   }
 
   /**
-   * transform の style 値を返す
-   * にじみなどの問題を避けるため、座標は整数値に変換する
+   * Return the value of transform
+   * In order to avoid problems such as bleeding, convert the number to an integers
    */
   getTransformValueRound (position) {
     return `translate3d(0, ${Math.round(position)}px, 0)`

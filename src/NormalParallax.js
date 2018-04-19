@@ -2,7 +2,7 @@ import noop from 'noop-es2015'
 import ParallaxBase from './ParallaxBase'
 
 /**
- * パララックス
+ * Parallax library
  *
  * @example
  * new NormalParallax('.js-parallax', {
@@ -11,15 +11,15 @@ import ParallaxBase from './ParallaxBase'
  */
 export default class NormalParallax extends ParallaxBase {
   /**
-   * @param {string|NodeList|Element|Element[]} target - パララックス対象要素
+   * @param {string|NodeList|Element|Element[]} target - Target elements (selector or element object)
    * @param {Object} options
-   * @param {function} [options.onResize=noop] - ウィンドウリサイズ時に実行する関数
-   * @param {function} [options.onScroll=noop] - スクロール時に実行する関数
-   * @param {boolean} [options.isRound=false] - transform の style 値を丸めるかどうか
-   * @param {boolean} [options.autoRun=true] - 自動実行するかどうか
-   * @param {number} [options.speed=0.1] - 移動スピード（-∞ 〜 ∞）
-   * @param {number} [options.speedSp=options.speed] - SP 表示での移動スピード（デフォルトは PC と同じ）
-   * @param {function} [options.isSP=noop] - SP表示かどうかを判別する関数
+   * @param {function} [options.onResize=noop] - Resize event handler
+   * @param {function} [options.onScroll=noop] - Scroll event handler
+   * @param {boolean} [options.isRound=false] - Whether transform style value is rounded or not
+   * @param {boolean} [options.autoRun=true] - Whether to run automatically
+   * @param {number} [options.speed=0.1] - Moving speed (-Infinity to Infinity)
+   * @param {number} [options.speedSp=options.speed] - Moving speed in SP display (default is same as PC)
+   * @param {function} [options.isSP=noop] - Function to determine whether SP display or not
    */
   constructor (target, options = {}) {
     const {
@@ -40,7 +40,7 @@ export default class NormalParallax extends ParallaxBase {
   }
 
   /**
-   * 各種値をキャッシュする
+   * Cache various values
    */
   cache () {
     this.isSpCurrent = this.isSP()
@@ -51,10 +51,10 @@ export default class NormalParallax extends ParallaxBase {
   }
 
   /**
-   * 各要素のポジションをキャッシュする
+   * Cache various values of one element
    */
   cacheElementPos (el, scrollY) {
-    // SP 無効指定ならパララックスさせない
+    // Do not parallax if it is specified to invalidate by SP
     if (this.isSpCurrent && el.dataset.sp === 'false') return
 
     const bounding = el.getBoundingClientRect()
@@ -71,7 +71,7 @@ export default class NormalParallax extends ParallaxBase {
   }
 
   /**
-   * 更新
+   * Update the position of each element
    */
   update () {
     this.centerViewport = this.scrollTop + this.windowHeight / 2
@@ -80,13 +80,13 @@ export default class NormalParallax extends ParallaxBase {
   }
 
   /**
-   * 各要素のポジション更新
+   * Update the position of one element
    */
   updateElement (item) {
     if (this.scrollTop > item.outPos) {
-      // アイテムが上の方に見えなくなった後
+      // After the element disappears in the upper direction
     } else if (this.scrollTop > item.inPos) {
-      // アイテムが下から見えた後
+      // After the element can be seen from below
       const position =
         (item.center - this.centerViewport) * item.speed
       item.el.style.transform = this[this.getTransformValueFuncName](position)

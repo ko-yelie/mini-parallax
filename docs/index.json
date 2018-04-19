@@ -1079,7 +1079,7 @@
     "__docId__": 67,
     "kind": "file",
     "name": "src/ParallaxBase.js",
-    "content": "import noop from 'noop-es2015'\nimport getElements from 'get-elements-array'\n\n/**\n * Common function for parallax\n */\nexport default class ParallaxBase {\n  /**\n   * @param {string|NodeList|Element|Element[]} target - Target elements (selector or element object)\n   * @param {Object} options\n   * @param {function} [options.onResize=noop] - Resize event handler\n   * @param {function} [options.onScroll=noop] - Scroll event handler\n   * @param {boolean} [options.isRound=false] - Whether transform style value is rounded or not\n   * @param {boolean} [options.autoRun=true] - Whether to run automatically\n   */\n  constructor (target, options = {}) {\n    const {\n      onResize = noop,\n      onScroll = noop,\n      isRound = false,\n      autoRun = true\n    } = options\n\n    this._els = getElements(target)\n    this._onResize = onResize\n    this._onScroll = onScroll\n    this._getTransformValueFuncName = `_getTransformValue${isRound ? 'Round' : ''}`\n    this._scrollTarget = document.scrollingElement || document.documentElement\n\n    window.addEventListener('resize', () => this._cache())\n\n    autoRun && this.run()\n  }\n\n  /**\n   * Run animation\n   */\n  run () {\n    this._cache()\n    requestAnimationFrame(() => this._tick())\n  }\n\n  /**\n   * Cache various values\n   */\n  _cache () {\n    this._windowHeight = window.innerHeight\n    const scrollY = window.scrollY\n\n    this._items = this._els\n      .map(el => {\n        el.style.transform = 'none'\n\n        return this._cacheElementPos(el, scrollY)\n      })\n      .filter(item => item)\n\n    this._onResize(this._windowHeight)\n  }\n\n  /**\n   * Each frame of animation\n   */\n  _tick () {\n    const scrollTop = this._scrollTarget.scrollTop\n    if (scrollTop !== this._scrollTop) {\n      // When the scroll position changes\n      this._scrollTop = scrollTop\n      this._update()\n    }\n\n    requestAnimationFrame(() => this._tick())\n  }\n\n  /**\n   * Update the position of each element\n   */\n  _update () {\n    this._items.forEach(item => this._updateElement(item))\n\n    this._onScroll(this._scrollTop)\n  }\n\n  /**\n   * Return the value of transform\n   */\n  _getTransformValue (position) {\n    return `translate3d(0, ${position}px, 0)`\n  }\n\n  /**\n   * Return the value of transform\n   * In order to avoid problems such as bleeding, convert the number to an integers\n   */\n  _getTransformValueRound (position) {\n    return `translate3d(0, ${Math.round(position)}px, 0)`\n  }\n}\n",
+    "content": "import noop from 'noop-es2015'\nimport getElements from 'get-elements-array'\n\n/**\n * Common function for parallax\n */\nexport default class ParallaxBase {\n  /**\n   * @param {string|NodeList|Element|Element[]} target - Target elements (selector or element object)\n   * @param {Object} options\n   * @param {function} [options.onResize=noop] - Resize event handler\n   * @param {function} [options.onScroll=noop] - Scroll event handler\n   * @param {boolean} [options.isRound=false] - Whether transform style value is rounded or not\n   * @param {boolean} [options.autoRun=true] - Whether to run automatically\n   */\n  constructor (target, options = {}) {\n    const {\n      onResize = noop,\n      onScroll = noop,\n      isRound = false,\n      autoRun = true\n    } = options\n\n    this._els = getElements(target)\n    this._onResize = onResize\n    this._onScroll = onScroll\n    this._getTransformValueFuncName = `_getTransformValue${isRound ? 'Round' : ''}`\n    this._scrollTarget = document.scrollingElement || document.documentElement\n\n    window.addEventListener('resize', () => {\n      this._cache()\n      this._update()\n      this._onResize(this._windowHeight)\n    })\n\n    autoRun && this.run()\n  }\n\n  /**\n   * Run animation\n   */\n  run () {\n    this._cache()\n    requestAnimationFrame(() => { this._tick() })\n  }\n\n  /**\n   * Cache various values\n   */\n  _cache () {\n    this._windowHeight = window.innerHeight\n    const scrollY = window.scrollY\n\n    this._items = this._els\n      .map(el => {\n        el.style.transform = 'none'\n\n        return this._cacheElementPos(el, scrollY)\n      })\n      .filter(item => item)\n  }\n\n  /**\n   * Each frame of animation\n   */\n  _tick () {\n    const scrollTop = this._scrollTarget.scrollTop\n    if (scrollTop !== this._scrollTop) {\n      // When the scroll position changes\n      this._scrollTop = scrollTop\n      this._update()\n    }\n\n    requestAnimationFrame(() => { this._tick() })\n  }\n\n  /**\n   * Update the position of each element\n   */\n  _update () {\n    this._items.forEach(item => this._updateElement(item))\n\n    this._onScroll(this._scrollTop)\n  }\n\n  /**\n   * Return the value of transform\n   */\n  _getTransformValue (position) {\n    return `translate3d(0, ${position}px, 0)`\n  }\n\n  /**\n   * Return the value of transform\n   * In order to avoid problems such as bleeding, convert the number to an integers\n   */\n  _getTransformValueRound (position) {\n    return `translate3d(0, ${Math.round(position)}px, 0)`\n  }\n}\n",
     "static": true,
     "longname": "/Users/koya.iwasaki/web/mini-parallax/src/ParallaxBase.js",
     "access": "public",
@@ -1283,7 +1283,7 @@
     "longname": "src/ParallaxBase.js~ParallaxBase#run",
     "access": "public",
     "description": "Run animation",
-    "lineNumber": 38,
+    "lineNumber": 42,
     "params": [],
     "return": null
   },
@@ -1298,7 +1298,7 @@
     "longname": "src/ParallaxBase.js~ParallaxBase#_cache",
     "access": "private",
     "description": "Cache various values",
-    "lineNumber": 46,
+    "lineNumber": 50,
     "params": [],
     "return": null
   },
@@ -1311,7 +1311,7 @@
     "longname": "src/ParallaxBase.js~ParallaxBase#_windowHeight",
     "access": "private",
     "description": null,
-    "lineNumber": 47,
+    "lineNumber": 51,
     "undocument": true,
     "type": {
       "types": [
@@ -1328,7 +1328,7 @@
     "longname": "src/ParallaxBase.js~ParallaxBase#_items",
     "access": "private",
     "description": null,
-    "lineNumber": 50,
+    "lineNumber": 54,
     "undocument": true,
     "type": {
       "types": [
@@ -1347,7 +1347,7 @@
     "longname": "src/ParallaxBase.js~ParallaxBase#_tick",
     "access": "private",
     "description": "Each frame of animation",
-    "lineNumber": 64,
+    "lineNumber": 66,
     "params": [],
     "return": null
   },
@@ -1360,7 +1360,7 @@
     "longname": "src/ParallaxBase.js~ParallaxBase#_scrollTop",
     "access": "private",
     "description": null,
-    "lineNumber": 68,
+    "lineNumber": 70,
     "undocument": true,
     "type": {
       "types": [
@@ -1379,7 +1379,7 @@
     "longname": "src/ParallaxBase.js~ParallaxBase#_update",
     "access": "private",
     "description": "Update the position of each element",
-    "lineNumber": 78,
+    "lineNumber": 80,
     "params": [],
     "return": null
   },
@@ -1394,7 +1394,7 @@
     "longname": "src/ParallaxBase.js~ParallaxBase#_getTransformValue",
     "access": "private",
     "description": "Return the value of transform",
-    "lineNumber": 87,
+    "lineNumber": 89,
     "params": [
       {
         "name": "position",
@@ -1420,7 +1420,7 @@
     "longname": "src/ParallaxBase.js~ParallaxBase#_getTransformValueRound",
     "access": "private",
     "description": "Return the value of transform\nIn order to avoid problems such as bleeding, convert the number to an integers",
-    "lineNumber": 95,
+    "lineNumber": 97,
     "params": [
       {
         "name": "position",
@@ -1448,7 +1448,7 @@
   },
   {
     "kind": "index",
-    "content": "# mini-parallax\nParallax library\n\n```js\nimport { NormalParallax } from 'mini-parallax'\n\nnew NormalParallax('.js-parallax', {\n  speed: 0.03\n})\n```\n\n```html\n<div class=\"js-parallax\"></div>\n\n<!-- Set speed only for this element -->\n<div class=\"js-parallax\" data-speed=\"0.05\"></div>\n```\n\n---\n\nAutomatically calculate the moving distance from the height of the parent element\n\n```js\nimport { BackgroundParallax } from 'mini-parallax'\n\nnew BackgroundParallax('.js-parallax')\n```\n\n```html\n<div class=\"parent\">\n  <div class=\"js-parallax\"></div>\n</div>\n```\n\n---\n\nIf you disable `autoRun`, run it at any time you like.\n\n```js\nimport { NormalParallax } from 'mini-parallax'\n\nconst parallax = new NormalParallax('.js-parallax', {\n  autoRun: false\n})\n\nwindow.addEventListener('load', () => {\n  parallax.run()\n})\n```\n\n---\n\nCDN\n\n```html\n<script src=\"https://unpkg.com/mini-parallax\"></script>\n```\n\n```js\nconst { NormalParallax } = MiniParallax\n\nnew NormalParallax('.js-parallax')\n```\n",
+    "content": "# mini-parallax\nParallax library\n\n## ES Modules\n\n### `NormalParallax`\n\n[Options](https://ko-yelie.github.io/mini-parallax/class/src/NormalParallax.js~NormalParallax.html#instance-constructor-constructor)\n\n```js\nimport { NormalParallax } from 'mini-parallax'\n\nnew NormalParallax('.js-parallax', {\n  speed: 0.03\n})\n```\n\n```html\n<div class=\"js-parallax\"></div>\n\n<!-- Set speed only for this element -->\n<div class=\"js-parallax\" data-speed=\"0.05\"></div>\n```\n\nIf you disable `autoRun`, run it at any time you like.\n\n```js\nconst parallax = new NormalParallax('.js-parallax', {\n  autoRun: false\n})\n\nwindow.addEventListener('load', () => {\n  parallax.run()\n})\n```\n\n### `BackgroundParallax`\n\nAutomatically calculate the moving distance from the height of the parent element\n\n[Options](https://ko-yelie.github.io/mini-parallax/class/src/BackgroundParallax.js~BackgroundParallax.html#instance-constructor-constructor)\n\n```js\nimport { BackgroundParallax } from 'mini-parallax'\n\nnew BackgroundParallax('.js-parallax')\n```\n\n```html\n<div class=\"parent\">\n  <div class=\"js-parallax\"></div>\n</div>\n```\n\n## CDN\n\n```html\n<script src=\"https://unpkg.com/mini-parallax\"></script>\n```\n\n`MiniParallax` is global object containing `NormalParallax` and `BackgroundParallax`.\n\n```js\nconst { NormalParallax } = MiniParallax\n\nnew NormalParallax('.js-parallax')\n```\n\n---\n\nIf you want more features, please consider other parallax libraries.\n\n- [RELLAX](https://github.com/dixonandmoe/rellax)\n- [Smooth](https://github.com/baptistebriel/smooth-scrolling)\n",
     "longname": "/Users/koya.iwasaki/web/mini-parallax/README.md",
     "name": "./README.md",
     "static": true,

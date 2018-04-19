@@ -59,6 +59,18 @@ new BackgroundParallax(&apos;.js-parallax&apos;)</code>
 &lt;/div&gt;</code>
 </code></pre>
 <hr>
+<p>If you disable <code>autoRun</code>, run it at any time you like.</p>
+<pre><code class="lang-js"><code class="source-code prettyprint">import { NormalParallax } from &apos;mini-parallax&apos;
+
+const parallax = new NormalParallax(&apos;.js-parallax&apos;, {
+  autoRun: false
+})
+
+window.addEventListener(&apos;load&apos;, () =&gt; {
+  parallax.run()
+})</code>
+</code></pre>
+<hr>
 <p>CDN</p>
 <pre><code class="lang-html"><code class="source-code prettyprint">&lt;script src=&quot;https://unpkg.com/mini-parallax&quot;&gt;&lt;/script&gt;</code>
 </code></pre>

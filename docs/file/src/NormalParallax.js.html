@@ -41,7 +41,7 @@
 import ParallaxBase from &apos;./ParallaxBase&apos;
 
 /**
- * &#x30D1;&#x30E9;&#x30E9;&#x30C3;&#x30AF;&#x30B9;
+ * Parallax library
  *
  * @example
  * new NormalParallax(&apos;.js-parallax&apos;, {
@@ -50,15 +50,15 @@ import ParallaxBase from &apos;./ParallaxBase&apos;
  */
 export default class NormalParallax extends ParallaxBase {
   /**
-   * @param {string|NodeList|Element|Element[]} target - &#x30D1;&#x30E9;&#x30E9;&#x30C3;&#x30AF;&#x30B9;&#x5BFE;&#x8C61;&#x8981;&#x7D20;
+   * @param {string|NodeList|Element|Element[]} target - Target elements (selector or element object)
    * @param {Object} options
-   * @param {function} [options.onResize=noop] - &#x30A6;&#x30A3;&#x30F3;&#x30C9;&#x30A6;&#x30EA;&#x30B5;&#x30A4;&#x30BA;&#x6642;&#x306B;&#x5B9F;&#x884C;&#x3059;&#x308B;&#x95A2;&#x6570;
-   * @param {function} [options.onScroll=noop] - &#x30B9;&#x30AF;&#x30ED;&#x30FC;&#x30EB;&#x6642;&#x306B;&#x5B9F;&#x884C;&#x3059;&#x308B;&#x95A2;&#x6570;
-   * @param {boolean} [options.isRound=false] - transform &#x306E; style &#x5024;&#x3092;&#x4E38;&#x3081;&#x308B;&#x304B;&#x3069;&#x3046;&#x304B;
-   * @param {boolean} [options.autoRun=true] - &#x81EA;&#x52D5;&#x5B9F;&#x884C;&#x3059;&#x308B;&#x304B;&#x3069;&#x3046;&#x304B;
-   * @param {number} [options.speed=0.1] - &#x79FB;&#x52D5;&#x30B9;&#x30D4;&#x30FC;&#x30C9;&#xFF08;-&#x221E; &#x301C; &#x221E;&#xFF09;
-   * @param {number} [options.speedSp=options.speed] - SP &#x8868;&#x793A;&#x3067;&#x306E;&#x79FB;&#x52D5;&#x30B9;&#x30D4;&#x30FC;&#x30C9;&#xFF08;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x306F; PC &#x3068;&#x540C;&#x3058;&#xFF09;
-   * @param {function} [options.isSP=noop] - SP&#x8868;&#x793A;&#x304B;&#x3069;&#x3046;&#x304B;&#x3092;&#x5224;&#x5225;&#x3059;&#x308B;&#x95A2;&#x6570;
+   * @param {function} [options.onResize=noop] - Resize event handler
+   * @param {function} [options.onScroll=noop] - Scroll event handler
+   * @param {boolean} [options.isRound=false] - Whether transform style value is rounded or not
+   * @param {boolean} [options.autoRun=true] - Whether to run automatically
+   * @param {number} [options.speed=0.1] - Moving speed (-Infinity to Infinity)
+   * @param {number} [options.speedSp=options.speed] - Moving speed in SP display (default is same as PC)
+   * @param {function} [options.isSP=noop] - Function to determine whether SP display or not
    */
   constructor (target, options = {}) {
     const {
@@ -71,30 +71,30 @@ export default class NormalParallax extends ParallaxBase {
     options.autoRun = false
     super(target, options)
 
-    this.speedPc = speed
-    this.speedSp = speedSp
-    this.isSP = isSP
+    this._speedPc = speed
+    this._speedSp = speedSp
+    this._isSP = isSP
 
     autoRun &amp;&amp; this.run()
   }
 
   /**
-   * &#x5404;&#x7A2E;&#x5024;&#x3092;&#x30AD;&#x30E3;&#x30C3;&#x30B7;&#x30E5;&#x3059;&#x308B;
+   * Cache various values
    */
-  cache () {
-    this.isSpCurrent = this.isSP()
-    this.speed = this.isSpCurrent ? this.speedSp : this.speedPc
+  _cache () {
+    this._isSpCurrent = this._isSP()
+    this.speed = this._isSpCurrent ? this._speedSp : this._speedPc
     this.speed *= window.innerWidth / window.innerHeight
 
-    super.cache()
+    super._cache()
   }
 
   /**
-   * &#x5404;&#x8981;&#x7D20;&#x306E;&#x30DD;&#x30B8;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x30AD;&#x30E3;&#x30C3;&#x30B7;&#x30E5;&#x3059;&#x308B;
+   * Cache various values of one element
    */
-  cacheElementPos (el, scrollY) {
-    // SP &#x7121;&#x52B9;&#x6307;&#x5B9A;&#x306A;&#x3089;&#x30D1;&#x30E9;&#x30E9;&#x30C3;&#x30AF;&#x30B9;&#x3055;&#x305B;&#x306A;&#x3044;
-    if (this.isSpCurrent &amp;&amp; el.dataset.sp === &apos;false&apos;) return
+  _cacheElementPos (el, scrollY) {
+    // Do not parallax if it is specified to invalidate by SP
+    if (this._isSpCurrent &amp;&amp; el.dataset.sp === &apos;false&apos;) return
 
     const bounding = el.getBoundingClientRect()
     const top = bounding.top + scrollY
@@ -104,31 +104,31 @@ export default class NormalParallax extends ParallaxBase {
       top,
       center: top + bounding.height / 2,
       speed: parseFloat(el.dataset.speed, 10) || this.speed,
-      inPos: top - this.windowHeight,
+      inPos: top - this._windowHeight,
       outPos: bounding.bottom + scrollY
     }
   }
 
   /**
-   * &#x66F4;&#x65B0;
+   * Update the position of each element
    */
-  update () {
-    this.centerViewport = this.scrollTop + this.windowHeight / 2
+  _update () {
+    this._centerViewport = this._scrollTop + this._windowHeight / 2
 
-    super.update()
+    super._update()
   }
 
   /**
-   * &#x5404;&#x8981;&#x7D20;&#x306E;&#x30DD;&#x30B8;&#x30B7;&#x30E7;&#x30F3;&#x66F4;&#x65B0;
+   * Update the position of one element
    */
-  updateElement (item) {
-    if (this.scrollTop &gt; item.outPos) {
-      // &#x30A2;&#x30A4;&#x30C6;&#x30E0;&#x304C;&#x4E0A;&#x306E;&#x65B9;&#x306B;&#x898B;&#x3048;&#x306A;&#x304F;&#x306A;&#x3063;&#x305F;&#x5F8C;
-    } else if (this.scrollTop &gt; item.inPos) {
-      // &#x30A2;&#x30A4;&#x30C6;&#x30E0;&#x304C;&#x4E0B;&#x304B;&#x3089;&#x898B;&#x3048;&#x305F;&#x5F8C;
+  _updateElement (item) {
+    if (this._scrollTop &gt; item.outPos) {
+      // After the element disappears in the upper direction
+    } else if (this._scrollTop &gt; item.inPos) {
+      // After the element can be seen from below
       const position =
-        (item.center - this.centerViewport) * item.speed
-      item.el.style.transform = this[this.getTransformValueFuncName](position)
+        (item.center - this._centerViewport) * item.speed
+      item.el.style.transform = this[this._getTransformValueFuncName](position)
     }
   }
 }

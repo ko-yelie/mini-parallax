@@ -27,7 +27,11 @@ export default class ParallaxBase {
     this._getTransformValueFuncName = `_getTransformValue${isRound ? 'Round' : ''}`
     this._scrollTarget = document.scrollingElement || document.documentElement
 
-    window.addEventListener('resize', () => this._cache())
+    window.addEventListener('resize', () => {
+      this._cache()
+      this._update()
+      this._onResize(this._windowHeight)
+    })
 
     autoRun && this.run()
   }
@@ -37,7 +41,7 @@ export default class ParallaxBase {
    */
   run () {
     this._cache()
-    requestAnimationFrame(() => this._tick())
+    requestAnimationFrame(() => { this._tick() })
   }
 
   /**
@@ -54,8 +58,6 @@ export default class ParallaxBase {
         return this._cacheElementPos(el, scrollY)
       })
       .filter(item => item)
-
-    this._onResize(this._windowHeight)
   }
 
   /**
@@ -69,7 +71,7 @@ export default class ParallaxBase {
       this._update()
     }
 
-    requestAnimationFrame(() => this._tick())
+    requestAnimationFrame(() => { this._tick() })
   }
 
   /**

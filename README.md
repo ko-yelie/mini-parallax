@@ -1,11 +1,15 @@
 # mini-parallax
 Parallax library
 
+Less Size, Less Functions
+
 ## ES Modules
 
-### `NormalParallax`
+```sh
+npm i mini-parallax
+```
 
-[Options](https://ko-yelie.github.io/mini-parallax/class/src/NormalParallax.js~NormalParallax.html#instance-constructor-constructor)
+### [`NormalParallax`](https://ko-yelie.github.io/mini-parallax/class/src/NormalParallax.js~NormalParallax.html)
 
 ```js
 import { NormalParallax } from 'mini-parallax'
@@ -34,11 +38,9 @@ window.addEventListener('load', () => {
 })
 ```
 
-### `BackgroundParallax`
+### [`BackgroundParallax`](https://ko-yelie.github.io/mini-parallax/class/src/BackgroundParallax.js~BackgroundParallax.html)
 
 Automatically calculate the moving distance from the height of the parent element
-
-[Options](https://ko-yelie.github.io/mini-parallax/class/src/BackgroundParallax.js~BackgroundParallax.html#instance-constructor-constructor)
 
 ```js
 import { BackgroundParallax } from 'mini-parallax'
@@ -70,5 +72,5 @@ new NormalParallax('.js-parallax')
 
 If you want more features, please consider other parallax libraries.
 
-- [RELLAX](https://github.com/dixonandmoe/rellax)
+- [Rellax](https://github.com/dixonandmoe/rellax)
 - [Smooth](https://github.com/baptistebriel/smooth-scrolling)

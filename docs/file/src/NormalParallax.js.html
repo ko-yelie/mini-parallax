@@ -83,8 +83,8 @@ export default class NormalParallax extends ParallaxBase {
    */
   _cache () {
     this._isSpCurrent = this._isSP()
-    this.speed = this._isSpCurrent ? this._speedSp : this._speedPc
-    this.speed *= window.innerWidth / window.innerHeight
+    this._speed = this._isSpCurrent ? this._speedSp : this._speedPc
+    this._speed *= window.innerWidth / window.innerHeight
 
     super._cache()
   }
@@ -103,7 +103,7 @@ export default class NormalParallax extends ParallaxBase {
       el,
       top,
       center: top + bounding.height / 2,
-      speed: parseFloat(el.dataset.speed, 10) || this.speed,
+      speed: parseFloat(el.dataset.speed, 10) || this._speed,
       inPos: top - this._windowHeight,
       outPos: bounding.bottom + scrollY
     }

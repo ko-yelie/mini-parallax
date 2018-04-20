@@ -2,7 +2,7 @@ import noop from 'noop-es2015'
 import getElements from 'get-elements-array'
 
 /**
- * Common function for parallax
+ * Base function for parallax
  */
 export default class ParallaxBase {
   /**

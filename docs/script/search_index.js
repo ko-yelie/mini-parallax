@@ -306,18 +306,6 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "src/backgroundparallax.js~backgroundparallax#_cacheelementpos",
-    "class/src/BackgroundParallax.js~BackgroundParallax.html#instance-method-_cacheElementPos",
-    "src/BackgroundParallax.js~BackgroundParallax#_cacheElementPos",
-    "method"
-  ],
-  [
-    "src/backgroundparallax.js~backgroundparallax#_updateelement",
-    "class/src/BackgroundParallax.js~BackgroundParallax.html#instance-method-_updateElement",
-    "src/BackgroundParallax.js~BackgroundParallax#_updateElement",
-    "method"
-  ],
-  [
     "src/backgroundparallax.js~backgroundparallax#constructor",
     "class/src/BackgroundParallax.js~BackgroundParallax.html#instance-constructor-constructor",
     "src/BackgroundParallax.js~BackgroundParallax#constructor",
@@ -330,154 +318,16 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "src/normalparallax.js~normalparallax#_cache",
-    "class/src/NormalParallax.js~NormalParallax.html#instance-method-_cache",
-    "src/NormalParallax.js~NormalParallax#_cache",
-    "method"
-  ],
-  [
-    "src/normalparallax.js~normalparallax#_cacheelementpos",
-    "class/src/NormalParallax.js~NormalParallax.html#instance-method-_cacheElementPos",
-    "src/NormalParallax.js~NormalParallax#_cacheElementPos",
-    "method"
-  ],
-  [
-    "src/normalparallax.js~normalparallax#_centerviewport",
-    "class/src/NormalParallax.js~NormalParallax.html#instance-member-_centerViewport",
-    "src/NormalParallax.js~NormalParallax#_centerViewport",
-    "member"
-  ],
-  [
-    "src/normalparallax.js~normalparallax#_issp",
-    "class/src/NormalParallax.js~NormalParallax.html#instance-member-_isSP",
-    "src/NormalParallax.js~NormalParallax#_isSP",
-    "member"
-  ],
-  [
-    "src/normalparallax.js~normalparallax#_isspcurrent",
-    "class/src/NormalParallax.js~NormalParallax.html#instance-member-_isSpCurrent",
-    "src/NormalParallax.js~NormalParallax#_isSpCurrent",
-    "member"
-  ],
-  [
-    "src/normalparallax.js~normalparallax#_speedpc",
-    "class/src/NormalParallax.js~NormalParallax.html#instance-member-_speedPc",
-    "src/NormalParallax.js~NormalParallax#_speedPc",
-    "member"
-  ],
-  [
-    "src/normalparallax.js~normalparallax#_speedsp",
-    "class/src/NormalParallax.js~NormalParallax.html#instance-member-_speedSp",
-    "src/NormalParallax.js~NormalParallax#_speedSp",
-    "member"
-  ],
-  [
-    "src/normalparallax.js~normalparallax#_update",
-    "class/src/NormalParallax.js~NormalParallax.html#instance-method-_update",
-    "src/NormalParallax.js~NormalParallax#_update",
-    "method"
-  ],
-  [
-    "src/normalparallax.js~normalparallax#_updateelement",
-    "class/src/NormalParallax.js~NormalParallax.html#instance-method-_updateElement",
-    "src/NormalParallax.js~NormalParallax#_updateElement",
-    "method"
-  ],
-  [
     "src/normalparallax.js~normalparallax#constructor",
     "class/src/NormalParallax.js~NormalParallax.html#instance-constructor-constructor",
     "src/NormalParallax.js~NormalParallax#constructor",
     "method"
   ],
   [
-    "src/normalparallax.js~normalparallax#speed",
-    "class/src/NormalParallax.js~NormalParallax.html#instance-member-speed",
-    "src/NormalParallax.js~NormalParallax#speed",
-    "member"
-  ],
-  [
     "src/parallaxbase.js",
     "file/src/ParallaxBase.js.html",
     "src/ParallaxBase.js",
     "file"
-  ],
-  [
-    "src/parallaxbase.js~parallaxbase#_cache",
-    "class/src/ParallaxBase.js~ParallaxBase.html#instance-method-_cache",
-    "src/ParallaxBase.js~ParallaxBase#_cache",
-    "method"
-  ],
-  [
-    "src/parallaxbase.js~parallaxbase#_els",
-    "class/src/ParallaxBase.js~ParallaxBase.html#instance-member-_els",
-    "src/ParallaxBase.js~ParallaxBase#_els",
-    "member"
-  ],
-  [
-    "src/parallaxbase.js~parallaxbase#_gettransformvalue",
-    "class/src/ParallaxBase.js~ParallaxBase.html#instance-method-_getTransformValue",
-    "src/ParallaxBase.js~ParallaxBase#_getTransformValue",
-    "method"
-  ],
-  [
-    "src/parallaxbase.js~parallaxbase#_gettransformvaluefuncname",
-    "class/src/ParallaxBase.js~ParallaxBase.html#instance-member-_getTransformValueFuncName",
-    "src/ParallaxBase.js~ParallaxBase#_getTransformValueFuncName",
-    "member"
-  ],
-  [
-    "src/parallaxbase.js~parallaxbase#_gettransformvalueround",
-    "class/src/ParallaxBase.js~ParallaxBase.html#instance-method-_getTransformValueRound",
-    "src/ParallaxBase.js~ParallaxBase#_getTransformValueRound",
-    "method"
-  ],
-  [
-    "src/parallaxbase.js~parallaxbase#_items",
-    "class/src/ParallaxBase.js~ParallaxBase.html#instance-member-_items",
-    "src/ParallaxBase.js~ParallaxBase#_items",
-    "member"
-  ],
-  [
-    "src/parallaxbase.js~parallaxbase#_onresize",
-    "class/src/ParallaxBase.js~ParallaxBase.html#instance-member-_onResize",
-    "src/ParallaxBase.js~ParallaxBase#_onResize",
-    "member"
-  ],
-  [
-    "src/parallaxbase.js~parallaxbase#_onscroll",
-    "class/src/ParallaxBase.js~ParallaxBase.html#instance-member-_onScroll",
-    "src/ParallaxBase.js~ParallaxBase#_onScroll",
-    "member"
-  ],
-  [
-    "src/parallaxbase.js~parallaxbase#_scrolltarget",
-    "class/src/ParallaxBase.js~ParallaxBase.html#instance-member-_scrollTarget",
-    "src/ParallaxBase.js~ParallaxBase#_scrollTarget",
-    "member"
-  ],
-  [
-    "src/parallaxbase.js~parallaxbase#_scrolltop",
-    "class/src/ParallaxBase.js~ParallaxBase.html#instance-member-_scrollTop",
-    "src/ParallaxBase.js~ParallaxBase#_scrollTop",
-    "member"
-  ],
-  [
-    "src/parallaxbase.js~parallaxbase#_tick",
-    "class/src/ParallaxBase.js~ParallaxBase.html#instance-method-_tick",
-    "src/ParallaxBase.js~ParallaxBase#_tick",
-    "method"
-  ],
-  [
-    "src/parallaxbase.js~parallaxbase#_update",
-    "class/src/ParallaxBase.js~ParallaxBase.html#instance-method-_update",
-    "src/ParallaxBase.js~ParallaxBase#_update",
-    "method"
-  ],
-  [
-    "src/parallaxbase.js~parallaxbase#_windowheight",
-    "class/src/ParallaxBase.js~ParallaxBase.html#instance-member-_windowHeight",
-    "src/ParallaxBase.js~ParallaxBase#_windowHeight",
-    "member"
   ],
   [
     "src/parallaxbase.js~parallaxbase#constructor",

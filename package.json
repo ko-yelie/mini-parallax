@@ -31,7 +31,8 @@
     "banner-package": "^0.1.0",
     "bili": "^3.0.15",
     "esdoc": "^1.0.4",
-    "esdoc-standard-plugin": "^1.0.0"
+    "esdoc-standard-plugin": "^1.0.0",
+    "marked": "^0.3.19"
   },
   "dependencies": {
     "get-elements-array": "^1.0.1",

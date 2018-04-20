@@ -12,9 +12,9 @@ import ParallaxBase from './ParallaxBase'
 export default class NormalParallax extends ParallaxBase {
   /**
    * @param {string|NodeList|Element|Element[]} target - Target elements (selector or element object)
-   * @param {Object} options
-   * @param {function} [options.onResize=noop] - Resize event handler
-   * @param {function} [options.onScroll=noop] - Scroll event handler
+   * @param {Object} [options={}]
+   * @param {onResize} [options.onResize=noop] - Resize event handler
+   * @param {onScroll} [options.onScroll=noop] - Scroll event handler
    * @param {boolean} [options.isRound=false] - Whether transform style value is rounded or not
    * @param {boolean} [options.autoRun=true] - Whether to run automatically
    * @param {number} [options.speed=0.1] - Moving speed (-Infinity to Infinity)

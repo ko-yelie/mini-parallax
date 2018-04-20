@@ -7,9 +7,9 @@ import getElements from 'get-elements-array'
 export default class ParallaxBase {
   /**
    * @param {string|NodeList|Element|Element[]} target - Target elements (selector or element object)
-   * @param {Object} options
-   * @param {function} [options.onResize=noop] - Resize event handler
-   * @param {function} [options.onScroll=noop] - Scroll event handler
+   * @param {Object} [options={}]
+   * @param {onResize} [options.onResize=noop] - Resize event handler
+   * @param {onScroll} [options.onScroll=noop] - Scroll event handler
    * @param {boolean} [options.isRound=false] - Whether transform style value is rounded or not
    * @param {boolean} [options.autoRun=true] - Whether to run automatically
    */
@@ -98,3 +98,13 @@ export default class ParallaxBase {
     return `translate3d(0, ${Math.round(position)}px, 0)`
   }
 }
+
+/**
+ * @typedef {function} onResize
+ * @param {number} windowHeight - `window.innerHeight`
+ */
+
+/**
+ * @typedef {function} onScroll
+ * @param {number} scrollTop - `document.scrollingElement.scrollTop`
+ */

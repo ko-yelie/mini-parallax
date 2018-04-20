@@ -342,6 +342,18 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/parallaxbase.js~onresize",
+    "typedef/index.html#static-typedef-onResize",
+    "src/ParallaxBase.js~onResize",
+    "typedef"
+  ],
+  [
+    "src/parallaxbase.js~onscroll",
+    "typedef/index.html#static-typedef-onScroll",
+    "src/ParallaxBase.js~onScroll",
+    "typedef"
+  ],
+  [
     "src/index.js",
     "file/src/index.js.html",
     "src/index.js",

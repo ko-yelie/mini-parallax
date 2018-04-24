@@ -2,9 +2,6 @@ import ParallaxBase from './ParallaxBase'
 
 /**
  * Automatically calculate the moving distance from the height of the parent element
- *
- * @example
- * new BackgroundParallax('.js-parallax')
  */
 export default class BackgroundParallax extends ParallaxBase {
   /**

@@ -18,7 +18,8 @@
   },
   "keywords": [
     "parallax",
-    "background"
+    "background",
+    "es2015"
   ],
   "author": "Ko.Yelie",
   "license": "MIT",

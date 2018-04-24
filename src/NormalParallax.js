@@ -3,11 +3,6 @@ import ParallaxBase from './ParallaxBase'
 
 /**
  * Parallax library
- *
- * @example
- * new NormalParallax('.js-parallax', {
- *   speed: 0.03
- * })
  */
 export default class NormalParallax extends ParallaxBase {
   /**

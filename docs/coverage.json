@@ -12,12 +12,12 @@
       "expectCount": 12,
       "actualCount": 6,
       "undocumentLines": [
-        35,
-        36,
-        37,
-        46,
-        47,
-        77
+        30,
+        31,
+        32,
+        41,
+        42,
+        72
       ]
     },
     "src/ParallaxBase.js": {

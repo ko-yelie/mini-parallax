@@ -567,7 +567,7 @@
     "__docId__": 48,
     "kind": "file",
     "name": "src/BackgroundParallax.js",
-    "content": "import ParallaxBase from './ParallaxBase'\n\n/**\n * Automatically calculate the moving distance from the height of the parent element\n *\n * @example\n * new BackgroundParallax('.js-parallax')\n */\nexport default class BackgroundParallax extends ParallaxBase {\n  /**\n   * @param {string|NodeList|Element|Element[]} target - Target elements (selector or element object)\n   * @param {Object} [options={}]\n   * @param {onResize} [options.onResize=noop] - Resize event handler\n   * @param {onScroll} [options.onScroll=noop] - Scroll event handler\n   * @param {boolean} [options.isRound=false] - Whether transform style value is rounded or not\n   * @param {boolean} [options.autoRun=true] - Whether to run automatically\n   */\n  constructor (target, options) {\n    super(target, options)\n  }\n\n  /**\n   * Cache various values of one element\n   */\n  _cacheElementPos (el, scrollY) {\n    const bounding = el.getBoundingClientRect()\n    const boundingParent = el.parentNode.getBoundingClientRect()\n    const top = boundingParent.top + scrollY\n    const inPos = top - this._windowHeight\n    const outPos = boundingParent.bottom + scrollY\n\n    return {\n      el,\n      max: boundingParent.height - bounding.height,\n      inPos,\n      outPos,\n      distance: outPos - inPos,\n      offset: boundingParent.top - bounding.top\n    }\n  }\n\n  /**\n   * Update the position of one element\n   */\n  _updateElement (item) {\n    if (this._scrollTop > item.outPos) {\n      // After the element disappears in the upper direction\n    } else {\n      const diff = this._scrollTop - item.inPos\n      if (diff > 0) {\n        // After the element can be seen from below\n        const rate = diff / item.distance\n        const position = item.offset + item.max - item.max * rate // max - (max - min) * rate\n\n        item.el.style.transform = this[this._getTransformValueFuncName](position)\n      }\n    }\n  }\n}\n",
+    "content": "import ParallaxBase from './ParallaxBase'\n\n/**\n * Automatically calculate the moving distance from the height of the parent element\n */\nexport default class BackgroundParallax extends ParallaxBase {\n  /**\n   * @param {string|NodeList|Element|Element[]} target - Target elements (selector or element object)\n   * @param {Object} [options={}]\n   * @param {onResize} [options.onResize=noop] - Resize event handler\n   * @param {onScroll} [options.onScroll=noop] - Scroll event handler\n   * @param {boolean} [options.isRound=false] - Whether transform style value is rounded or not\n   * @param {boolean} [options.autoRun=true] - Whether to run automatically\n   */\n  constructor (target, options) {\n    super(target, options)\n  }\n\n  /**\n   * Cache various values of one element\n   */\n  _cacheElementPos (el, scrollY) {\n    const bounding = el.getBoundingClientRect()\n    const boundingParent = el.parentNode.getBoundingClientRect()\n    const top = boundingParent.top + scrollY\n    const inPos = top - this._windowHeight\n    const outPos = boundingParent.bottom + scrollY\n\n    return {\n      el,\n      max: boundingParent.height - bounding.height,\n      inPos,\n      outPos,\n      distance: outPos - inPos,\n      offset: boundingParent.top - bounding.top\n    }\n  }\n\n  /**\n   * Update the position of one element\n   */\n  _updateElement (item) {\n    if (this._scrollTop > item.outPos) {\n      // After the element disappears in the upper direction\n    } else {\n      const diff = this._scrollTop - item.inPos\n      if (diff > 0) {\n        // After the element can be seen from below\n        const rate = diff / item.distance\n        const position = item.offset + item.max - item.max * rate // max - (max - min) * rate\n\n        item.el.style.transform = this[this._getTransformValueFuncName](position)\n      }\n    }\n  }\n}\n",
     "static": true,
     "longname": "/Users/koya.iwasaki/web/mini-parallax/src/BackgroundParallax.js",
     "access": "public",
@@ -586,10 +586,7 @@
     "importPath": "mini-parallax/src/BackgroundParallax.js",
     "importStyle": "BackgroundParallax",
     "description": "Automatically calculate the moving distance from the height of the parent element",
-    "examples": [
-      "new BackgroundParallax('.js-parallax')"
-    ],
-    "lineNumber": 9,
+    "lineNumber": 6,
     "interface": false,
     "extends": [
       "src/ParallaxBase.js~ParallaxBase"
@@ -606,7 +603,7 @@
     "longname": "src/BackgroundParallax.js~BackgroundParallax#constructor",
     "access": "public",
     "description": "",
-    "lineNumber": 18,
+    "lineNumber": 15,
     "params": [
       {
         "nullable": null,
@@ -694,7 +691,7 @@
     "longname": "src/BackgroundParallax.js~BackgroundParallax#_cacheElementPos",
     "access": "private",
     "description": "Cache various values of one element",
-    "lineNumber": 25,
+    "lineNumber": 22,
     "ignore": true,
     "params": [
       {
@@ -727,7 +724,7 @@
     "longname": "src/BackgroundParallax.js~BackgroundParallax#_updateElement",
     "access": "private",
     "description": "Update the position of one element",
-    "lineNumber": 45,
+    "lineNumber": 42,
     "ignore": true,
     "params": [
       {
@@ -743,7 +740,7 @@
     "__docId__": 53,
     "kind": "file",
     "name": "src/NormalParallax.js",
-    "content": "import noop from 'noop-es2015'\nimport ParallaxBase from './ParallaxBase'\n\n/**\n * Parallax library\n *\n * @example\n * new NormalParallax('.js-parallax', {\n *   speed: 0.03\n * })\n */\nexport default class NormalParallax extends ParallaxBase {\n  /**\n   * @param {string|NodeList|Element|Element[]} target - Target elements (selector or element object)\n   * @param {Object} [options={}]\n   * @param {onResize} [options.onResize=noop] - Resize event handler\n   * @param {onScroll} [options.onScroll=noop] - Scroll event handler\n   * @param {boolean} [options.isRound=false] - Whether transform style value is rounded or not\n   * @param {boolean} [options.autoRun=true] - Whether to run automatically\n   * @param {number} [options.speed=0.1] - Moving speed (-Infinity to Infinity)\n   * @param {number} [options.speedSp=options.speed] - Moving speed in SP display (default is same as PC)\n   * @param {function} [options.isSP=noop] - Function to determine whether SP display or not\n   */\n  constructor (target, options = {}) {\n    const {\n      speed = 0.1,\n      speedSp = speed,\n      isSP = noop,\n      autoRun = true\n    } = options\n\n    options.autoRun = false\n    super(target, options)\n\n    this._speedPc = speed\n    this._speedSp = speedSp\n    this._isSP = isSP\n\n    autoRun && this.run()\n  }\n\n  /**\n   * Cache various values\n   */\n  _cache () {\n    this._isSpCurrent = this._isSP()\n    this._speed = this._isSpCurrent ? this._speedSp : this._speedPc\n    this._speed *= window.innerWidth / window.innerHeight\n\n    super._cache()\n  }\n\n  /**\n   * Cache various values of one element\n   */\n  _cacheElementPos (el, scrollY) {\n    // Do not parallax if it is specified to invalidate by SP\n    if (this._isSpCurrent && el.dataset.sp === 'false') return\n\n    const bounding = el.getBoundingClientRect()\n    const top = bounding.top + scrollY\n\n    return {\n      el,\n      top,\n      center: top + bounding.height / 2,\n      speed: parseFloat(el.dataset.speed, 10) || this._speed,\n      inPos: top - this._windowHeight,\n      outPos: bounding.bottom + scrollY\n    }\n  }\n\n  /**\n   * Update the position of each element\n   */\n  _update () {\n    this._centerViewport = this._scrollTop + this._windowHeight / 2\n\n    super._update()\n  }\n\n  /**\n   * Update the position of one element\n   */\n  _updateElement (item) {\n    if (this._scrollTop > item.outPos) {\n      // After the element disappears in the upper direction\n    } else if (this._scrollTop > item.inPos) {\n      // After the element can be seen from below\n      const position =\n        (item.center - this._centerViewport) * item.speed\n      item.el.style.transform = this[this._getTransformValueFuncName](position)\n    }\n  }\n}\n",
+    "content": "import noop from 'noop-es2015'\nimport ParallaxBase from './ParallaxBase'\n\n/**\n * Parallax library\n */\nexport default class NormalParallax extends ParallaxBase {\n  /**\n   * @param {string|NodeList|Element|Element[]} target - Target elements (selector or element object)\n   * @param {Object} [options={}]\n   * @param {onResize} [options.onResize=noop] - Resize event handler\n   * @param {onScroll} [options.onScroll=noop] - Scroll event handler\n   * @param {boolean} [options.isRound=false] - Whether transform style value is rounded or not\n   * @param {boolean} [options.autoRun=true] - Whether to run automatically\n   * @param {number} [options.speed=0.1] - Moving speed (-Infinity to Infinity)\n   * @param {number} [options.speedSp=options.speed] - Moving speed in SP display (default is same as PC)\n   * @param {function} [options.isSP=noop] - Function to determine whether SP display or not\n   */\n  constructor (target, options = {}) {\n    const {\n      speed = 0.1,\n      speedSp = speed,\n      isSP = noop,\n      autoRun = true\n    } = options\n\n    options.autoRun = false\n    super(target, options)\n\n    this._speedPc = speed\n    this._speedSp = speedSp\n    this._isSP = isSP\n\n    autoRun && this.run()\n  }\n\n  /**\n   * Cache various values\n   */\n  _cache () {\n    this._isSpCurrent = this._isSP()\n    this._speed = this._isSpCurrent ? this._speedSp : this._speedPc\n    this._speed *= window.innerWidth / window.innerHeight\n\n    super._cache()\n  }\n\n  /**\n   * Cache various values of one element\n   */\n  _cacheElementPos (el, scrollY) {\n    // Do not parallax if it is specified to invalidate by SP\n    if (this._isSpCurrent && el.dataset.sp === 'false') return\n\n    const bounding = el.getBoundingClientRect()\n    const top = bounding.top + scrollY\n\n    return {\n      el,\n      top,\n      center: top + bounding.height / 2,\n      speed: parseFloat(el.dataset.speed, 10) || this._speed,\n      inPos: top - this._windowHeight,\n      outPos: bounding.bottom + scrollY\n    }\n  }\n\n  /**\n   * Update the position of each element\n   */\n  _update () {\n    this._centerViewport = this._scrollTop + this._windowHeight / 2\n\n    super._update()\n  }\n\n  /**\n   * Update the position of one element\n   */\n  _updateElement (item) {\n    if (this._scrollTop > item.outPos) {\n      // After the element disappears in the upper direction\n    } else if (this._scrollTop > item.inPos) {\n      // After the element can be seen from below\n      const position =\n        (item.center - this._centerViewport) * item.speed\n      item.el.style.transform = this[this._getTransformValueFuncName](position)\n    }\n  }\n}\n",
     "static": true,
     "longname": "/Users/koya.iwasaki/web/mini-parallax/src/NormalParallax.js",
     "access": "public",
@@ -762,10 +759,7 @@
     "importPath": "mini-parallax/src/NormalParallax.js",
     "importStyle": "NormalParallax",
     "description": "Parallax library",
-    "examples": [
-      "new NormalParallax('.js-parallax', {\n  speed: 0.03\n})"
-    ],
-    "lineNumber": 12,
+    "lineNumber": 7,
     "interface": false,
     "extends": [
       "src/ParallaxBase.js~ParallaxBase"
@@ -782,7 +776,7 @@
     "longname": "src/NormalParallax.js~NormalParallax#constructor",
     "access": "public",
     "description": "",
-    "lineNumber": 24,
+    "lineNumber": 19,
     "params": [
       {
         "nullable": null,
@@ -904,7 +898,7 @@
     "longname": "src/NormalParallax.js~NormalParallax#_speedPc",
     "access": "private",
     "description": null,
-    "lineNumber": 35,
+    "lineNumber": 30,
     "undocument": true,
     "ignore": true,
     "type": {
@@ -922,7 +916,7 @@
     "longname": "src/NormalParallax.js~NormalParallax#_speedSp",
     "access": "private",
     "description": null,
-    "lineNumber": 36,
+    "lineNumber": 31,
     "undocument": true,
     "ignore": true,
     "type": {
@@ -940,7 +934,7 @@
     "longname": "src/NormalParallax.js~NormalParallax#_isSP",
     "access": "private",
     "description": null,
-    "lineNumber": 37,
+    "lineNumber": 32,
     "undocument": true,
     "ignore": true,
     "type": {
@@ -960,7 +954,7 @@
     "longname": "src/NormalParallax.js~NormalParallax#_cache",
     "access": "private",
     "description": "Cache various values",
-    "lineNumber": 45,
+    "lineNumber": 40,
     "ignore": true,
     "params": [],
     "return": null
@@ -974,7 +968,7 @@
     "longname": "src/NormalParallax.js~NormalParallax#_isSpCurrent",
     "access": "private",
     "description": null,
-    "lineNumber": 46,
+    "lineNumber": 41,
     "undocument": true,
     "ignore": true,
     "type": {
@@ -992,7 +986,7 @@
     "longname": "src/NormalParallax.js~NormalParallax#_speed",
     "access": "private",
     "description": null,
-    "lineNumber": 47,
+    "lineNumber": 42,
     "undocument": true,
     "ignore": true,
     "type": {
@@ -1012,7 +1006,7 @@
     "longname": "src/NormalParallax.js~NormalParallax#_cacheElementPos",
     "access": "private",
     "description": "Cache various values of one element",
-    "lineNumber": 56,
+    "lineNumber": 51,
     "ignore": true,
     "params": [
       {
@@ -1045,7 +1039,7 @@
     "longname": "src/NormalParallax.js~NormalParallax#_update",
     "access": "private",
     "description": "Update the position of each element",
-    "lineNumber": 76,
+    "lineNumber": 71,
     "ignore": true,
     "params": [],
     "return": null
@@ -1059,7 +1053,7 @@
     "longname": "src/NormalParallax.js~NormalParallax#_centerViewport",
     "access": "private",
     "description": null,
-    "lineNumber": 77,
+    "lineNumber": 72,
     "undocument": true,
     "ignore": true,
     "type": {
@@ -1079,7 +1073,7 @@
     "longname": "src/NormalParallax.js~NormalParallax#_updateElement",
     "access": "private",
     "description": "Update the position of one element",
-    "lineNumber": 85,
+    "lineNumber": 80,
     "ignore": true,
     "params": [
       {
@@ -1537,7 +1531,7 @@
   },
   {
     "kind": "index",
-    "content": "# mini-parallax\nParallax library\n\n## ES Modules\n\n### `NormalParallax`\n\n[Options](https://ko-yelie.github.io/mini-parallax/class/src/NormalParallax.js~NormalParallax.html#instance-constructor-constructor)\n\n```js\nimport { NormalParallax } from 'mini-parallax'\n\nnew NormalParallax('.js-parallax', {\n  speed: 0.03\n})\n```\n\n```html\n<div class=\"js-parallax\"></div>\n\n<!-- Set speed only for this element -->\n<div class=\"js-parallax\" data-speed=\"0.05\"></div>\n```\n\nIf you disable `autoRun`, run it at any time you like.\n\n```js\nconst parallax = new NormalParallax('.js-parallax', {\n  autoRun: false\n})\n\nwindow.addEventListener('load', () => {\n  parallax.run()\n})\n```\n\n### `BackgroundParallax`\n\nAutomatically calculate the moving distance from the height of the parent element\n\n[Options](https://ko-yelie.github.io/mini-parallax/class/src/BackgroundParallax.js~BackgroundParallax.html#instance-constructor-constructor)\n\n```js\nimport { BackgroundParallax } from 'mini-parallax'\n\nnew BackgroundParallax('.js-parallax')\n```\n\n```html\n<div class=\"parent\">\n  <div class=\"js-parallax\"></div>\n</div>\n```\n\n## CDN\n\n```html\n<script src=\"https://unpkg.com/mini-parallax\"></script>\n```\n\n`MiniParallax` is global object containing `NormalParallax` and `BackgroundParallax`.\n\n```js\nconst { NormalParallax } = MiniParallax\n\nnew NormalParallax('.js-parallax')\n```\n\n---\n\nIf you want more features, please consider other parallax libraries.\n\n- [RELLAX](https://github.com/dixonandmoe/rellax)\n- [Smooth](https://github.com/baptistebriel/smooth-scrolling)\n",
+    "content": "# mini-parallax\nParallax library\n\nLess Size, Less Features\n\n## ES Modules\n\n[npm](https://www.npmjs.com/package/mini-parallax)\n\n```sh\nnpm i mini-parallax\n```\n\n### NormalParallax\n\n[Docs](https://ko-yelie.github.io/mini-parallax/class/src/NormalParallax.js~NormalParallax.html)\n\n```js\nimport { NormalParallax } from 'mini-parallax'\n\nnew NormalParallax('.js-parallax', {\n  speed: 0.03\n})\n```\n\n```html\n<div class=\"js-parallax\"></div>\n\n<!-- Set speed only for this element -->\n<div class=\"js-parallax\" data-speed=\"0.05\"></div>\n```\n\nIf you disable `autoRun`, run it at any time you like.\n\n```js\nconst parallax = new NormalParallax('.js-parallax', {\n  autoRun: false\n})\n\nwindow.addEventListener('load', () => {\n  parallax.run()\n})\n```\n\n### BackgroundParallax\n\n[Docs](https://ko-yelie.github.io/mini-parallax/class/src/BackgroundParallax.js~BackgroundParallax.html)\n\nAutomatically calculate the moving distance from the height of the parent element\n\n```js\nimport { BackgroundParallax } from 'mini-parallax'\n\nnew BackgroundParallax('.js-parallax')\n```\n\n```html\n<div class=\"parent\">\n  <div class=\"js-parallax\"></div>\n</div>\n```\n\n## CDN\n\n[Download](https://unpkg.com/mini-parallax) (3.7 KB)\n\n```html\n<script src=\"https://unpkg.com/mini-parallax\"></script>\n```\n\n`MiniParallax` is global object containing `NormalParallax` and `BackgroundParallax`.\n\n```js\nconst { NormalParallax } = MiniParallax\n\nnew NormalParallax('.js-parallax')\n```\n\n---\n\nIf you want more features, please consider other parallax libraries.\n\n- [Rellax](https://github.com/dixonandmoe/rellax)\n- [smooth](https://github.com/baptistebriel/smooth-scrolling)\n",
     "longname": "/Users/koya.iwasaki/web/mini-parallax/README.md",
     "name": "./README.md",
     "static": true,
@@ -1545,7 +1539,7 @@
   },
   {
     "kind": "packageJSON",
-    "content": "{\n  \"name\": \"mini-parallax\",\n  \"moduleName\": \"MiniParallax\",\n  \"version\": \"0.2.3\",\n  \"description\": \"Parallax library\",\n  \"main\": \"dist/mini-parallax.es.js\",\n  \"unpkg\": \"dist/mini-parallax.iife.min.js\",\n  \"files\": [\n    \"dist/\"\n  ],\n  \"scripts\": {\n    \"build\": \"bili\",\n    \"docs\": \"esdoc\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://ko-yelie@github.com/ko-yelie/mini-parallax.git\"\n  },\n  \"keywords\": [\n    \"parallax\",\n    \"background\"\n  ],\n  \"author\": \"Ko.Yelie\",\n  \"license\": \"MIT\",\n  \"year\": 2018,\n  \"bugs\": {\n    \"url\": \"https://github.com/ko-yelie/mini-parallax/issues\"\n  },\n  \"homepage\": \"https://github.com/ko-yelie/mini-parallax#readme\",\n  \"devDependencies\": {\n    \"banner-package\": \"^0.1.0\",\n    \"bili\": \"^3.0.15\",\n    \"esdoc\": \"^1.0.4\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"marked\": \"^0.3.19\"\n  },\n  \"dependencies\": {\n    \"get-elements-array\": \"^1.0.1\",\n    \"noop-es2015\": \"^1.0.1\"\n  }\n}\n",
+    "content": "{\n  \"name\": \"mini-parallax\",\n  \"moduleName\": \"MiniParallax\",\n  \"version\": \"0.2.4\",\n  \"description\": \"Parallax library\",\n  \"main\": \"dist/mini-parallax.es.js\",\n  \"unpkg\": \"dist/mini-parallax.iife.min.js\",\n  \"files\": [\n    \"dist/\"\n  ],\n  \"scripts\": {\n    \"build\": \"bili\",\n    \"docs\": \"esdoc\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://ko-yelie@github.com/ko-yelie/mini-parallax.git\"\n  },\n  \"keywords\": [\n    \"parallax\",\n    \"background\",\n    \"es2015\"\n  ],\n  \"author\": \"Ko.Yelie\",\n  \"license\": \"MIT\",\n  \"year\": 2018,\n  \"bugs\": {\n    \"url\": \"https://github.com/ko-yelie/mini-parallax/issues\"\n  },\n  \"homepage\": \"https://github.com/ko-yelie/mini-parallax#readme\",\n  \"devDependencies\": {\n    \"banner-package\": \"^0.1.0\",\n    \"bili\": \"^3.0.15\",\n    \"esdoc\": \"^1.0.4\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"marked\": \"^0.3.19\"\n  },\n  \"dependencies\": {\n    \"get-elements-array\": \"^1.0.1\",\n    \"noop-es2015\": \"^1.0.1\"\n  }\n}\n",
     "longname": "/Users/koya.iwasaki/web/mini-parallax/package.json",
     "name": "package.json",
     "static": true,

@@ -36,7 +36,6 @@
     "marked": "^0.3.19"
   },
   "dependencies": {
-    "get-elements-array": "^1.0.1",
-    "noop-es2015": "^1.0.1"
+    "get-elements-array": "^1.0.1"
   }
 }

@@ -18,6 +18,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "mini-parallax/src/lib/utility.js~noop",
+    "function/index.html#static-function-noop",
+    "<span>noop</span> <span class=\"search-result-import-path\">mini-parallax/src/lib/utility.js</span>",
+    "function"
+  ],
+  [
     "src/.external-ecmascript.js~array",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
     "src/.external-ecmascript.js~Array",
@@ -357,6 +363,12 @@ window.esdocSearchIndex = [
     "src/index.js",
     "file/src/index.js.html",
     "src/index.js",
+    "file"
+  ],
+  [
+    "src/lib/utility.js",
+    "file/src/lib/utility.js.html",
+    "src/lib/utility.js",
     "file"
   ]
 ]

@@ -1,4 +1,4 @@
-import noop from 'noop-es2015'
+import { noop } from './lib/utility'
 import getElements from 'get-elements-array'
 
 /**

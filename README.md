@@ -44,9 +44,9 @@ window.addEventListener('load', () => {
 
 ### BackgroundParallax
 
-[Docs](https://ko-yelie.github.io/mini-parallax/class/src/BackgroundParallax.js~BackgroundParallax.html)
-
 Automatically calculate the moving distance from the height of the parent element
+
+[Docs](https://ko-yelie.github.io/mini-parallax/class/src/BackgroundParallax.js~BackgroundParallax.html)
 
 ```js
 import { BackgroundParallax } from 'mini-parallax'

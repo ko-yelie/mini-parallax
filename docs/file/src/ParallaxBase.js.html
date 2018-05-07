@@ -91,11 +91,12 @@ export default class ParallaxBase {
    */
   _cache () {
     this._windowHeight = window.innerHeight
-    const scrollY = window.scrollY
+    const scrollY = window.scrollY || window.pageYOffset
 
     this._items = this._els
       .map(el =&gt; {
         el.style.transform = &apos;none&apos;
+        el.style.willChange = &apos;transform&apos;
 
         return this._cacheElementPos(el, scrollY)
       })

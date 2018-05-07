@@ -54,6 +54,7 @@ export default class ParallaxBase {
     this._items = this._els
       .map(el => {
         el.style.transform = 'none'
+        el.style.willChange = 'transform'
 
         return this._cacheElementPos(el, scrollY)
       })

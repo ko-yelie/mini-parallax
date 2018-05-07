@@ -49,7 +49,7 @@ export default class ParallaxBase {
    */
   _cache () {
     this._windowHeight = window.innerHeight
-    const scrollY = window.scrollY
+    const scrollY = window.scrollY || window.pageYOffset
 
     this._items = this._els
       .map(el => {

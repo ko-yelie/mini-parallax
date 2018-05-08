@@ -348,6 +348,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/parallaxbase.js~parallaxbase#update",
+    "class/src/ParallaxBase.js~ParallaxBase.html#instance-method-update",
+    "src/ParallaxBase.js~ParallaxBase#update",
+    "method"
+  ],
+  [
     "src/parallaxbase.js~onresize",
     "typedef/index.html#static-typedef-onResize",
     "src/ParallaxBase.js~onResize",

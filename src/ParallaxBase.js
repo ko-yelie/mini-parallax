@@ -28,9 +28,11 @@ export default class ParallaxBase {
     this._scrollTarget = document.scrollingElement || document.documentElement
 
     window.addEventListener('resize', () => {
-      this._cache()
-      this._update()
+      this.update()
       this._onResize(this._windowHeight)
+    })
+    window.addEventListener('load', () => {
+      this.update()
     })
 
     autoRun && this.run()
@@ -42,6 +44,14 @@ export default class ParallaxBase {
   run () {
     this._cache()
     requestAnimationFrame(() => { this._tick() })
+  }
+
+  /**
+   * Update cache and position
+   */
+  update () {
+    this._cache()
+    this._update()
   }
 
   /**

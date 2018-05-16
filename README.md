@@ -3,7 +3,13 @@ Parallax library
 
 Less Features, Less Size
 
-## ES Modules
+## Demo
+
+[CodePen](https://codepen.io/ko-yelie/pen/vjaLRg)
+
+## Installation
+
+### ES Modules
 
 [npm](https://www.npmjs.com/package/mini-parallax)
 
@@ -11,7 +17,27 @@ Less Features, Less Size
 npm i mini-parallax
 ```
 
-### NormalParallax
+```js
+import { NormalParallax, BackgroundParallax } from 'mini-parallax'
+```
+
+### CDN
+
+[unpkg](https://unpkg.com/mini-parallax) (3.7 KB)
+
+```html
+<script src="https://unpkg.com/mini-parallax"></script>
+```
+
+```js
+const { NormalParallax, BackgroundParallax } = MiniParallax
+```
+
+`MiniParallax` is global object containing `NormalParallax` and `BackgroundParallax` class.
+
+## Usage
+
+### `NormalParallax` class
 
 [Docs](https://ko-yelie.github.io/mini-parallax/class/src/NormalParallax.js~NormalParallax.html)
 
@@ -42,38 +68,30 @@ window.addEventListener('load', () => {
 })
 ```
 
-### BackgroundParallax
+If the text is in the parallax element, it will blur, so set the `isRound` option to `true`.
 
-Automatically calculate the moving distance from the height of the parent element
+```js
+new NormalParallax('.js-parallax', {
+  isRound: true
+})
+```
+
+### `BackgroundParallax` class
+
+It automatically calculates the position of the background element from the height of the parent element and the background element.
 
 [Docs](https://ko-yelie.github.io/mini-parallax/class/src/BackgroundParallax.js~BackgroundParallax.html)
 
 ```js
 import { BackgroundParallax } from 'mini-parallax'
 
-new BackgroundParallax('.js-parallax')
+new BackgroundParallax('.js-background-parallax')
 ```
 
 ```html
 <div class="parent">
-  <div class="js-parallax"></div>
+  <div class="js-background-parallax"></div>
 </div>
-```
-
-## CDN
-
-[Download](https://unpkg.com/mini-parallax) (3.7 KB)
-
-```html
-<script src="https://unpkg.com/mini-parallax"></script>
-```
-
-`MiniParallax` is global object containing `NormalParallax` and `BackgroundParallax`.
-
-```js
-const { NormalParallax } = MiniParallax
-
-new NormalParallax('.js-parallax')
 ```
 
 ## Browsers support

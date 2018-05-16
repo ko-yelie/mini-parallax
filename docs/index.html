@@ -41,10 +41,19 @@
 
 <div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="mini-parallax">mini-parallax</h1><p>Parallax library</p>
 <p>Less Features, Less Size</p>
-<h2 id="es-modules">ES Modules</h2><p><a href="https://www.npmjs.com/package/mini-parallax">npm</a></p>
+<h2 id="demo">Demo</h2><p><a href="https://codepen.io/ko-yelie/pen/vjaLRg">CodePen</a></p>
+<h2 id="installation">Installation</h2><h3 id="es-modules">ES Modules</h3><p><a href="https://www.npmjs.com/package/mini-parallax">npm</a></p>
 <pre><code class="lang-sh"><code class="source-code prettyprint">npm i mini-parallax</code>
 </code></pre>
-<h3 id="normalparallax">NormalParallax</h3><p><a href="https://ko-yelie.github.io/mini-parallax/class/src/NormalParallax.js~NormalParallax.html">Docs</a></p>
+<pre><code class="lang-js"><code class="source-code prettyprint">import { NormalParallax, BackgroundParallax } from &apos;mini-parallax&apos;</code>
+</code></pre>
+<h3 id="cdn">CDN</h3><p><a href="https://unpkg.com/mini-parallax">unpkg</a> (3.7 KB)</p>
+<pre><code class="lang-html"><code class="source-code prettyprint">&lt;script src=&quot;https://unpkg.com/mini-parallax&quot;&gt;&lt;/script&gt;</code>
+</code></pre>
+<pre><code class="lang-js"><code class="source-code prettyprint">const { NormalParallax, BackgroundParallax } = MiniParallax</code>
+</code></pre>
+<p><code>MiniParallax</code> is global object containing <code>NormalParallax</code> and <code>BackgroundParallax</code> class.</p>
+<h2 id="usage">Usage</h2><h3 id="-code-normalparallax--code--class"><code>NormalParallax</code> class</h3><p><a href="https://ko-yelie.github.io/mini-parallax/class/src/NormalParallax.js~NormalParallax.html">Docs</a></p>
 <pre><code class="lang-js"><code class="source-code prettyprint">import { NormalParallax } from &apos;mini-parallax&apos;
 
 new NormalParallax(&apos;.js-parallax&apos;, {
@@ -65,23 +74,20 @@ window.addEventListener(&apos;load&apos;, () =&gt; {
   parallax.run()
 })</code>
 </code></pre>
-<h3 id="backgroundparallax">BackgroundParallax</h3><p>Automatically calculate the moving distance from the height of the parent element</p>
+<p>If the text is in the parallax element, it will blur, so set the <code>isRound</code> option to <code>true</code>.</p>
+<pre><code class="lang-js"><code class="source-code prettyprint">new NormalParallax(&apos;.js-parallax&apos;, {
+  isRound: true
+})</code>
+</code></pre>
+<h3 id="-code-backgroundparallax--code--class"><code>BackgroundParallax</code> class</h3><p>It automatically calculates the position of the background element from the height of the parent element and the background element.</p>
 <p><a href="https://ko-yelie.github.io/mini-parallax/class/src/BackgroundParallax.js~BackgroundParallax.html">Docs</a></p>
 <pre><code class="lang-js"><code class="source-code prettyprint">import { BackgroundParallax } from &apos;mini-parallax&apos;
 
-new BackgroundParallax(&apos;.js-parallax&apos;)</code>
+new BackgroundParallax(&apos;.js-background-parallax&apos;)</code>
 </code></pre>
 <pre><code class="lang-html"><code class="source-code prettyprint">&lt;div class=&quot;parent&quot;&gt;
-  &lt;div class=&quot;js-parallax&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;js-background-parallax&quot;&gt;&lt;/div&gt;
 &lt;/div&gt;</code>
-</code></pre>
-<h2 id="cdn">CDN</h2><p><a href="https://unpkg.com/mini-parallax">Download</a> (3.7 KB)</p>
-<pre><code class="lang-html"><code class="source-code prettyprint">&lt;script src=&quot;https://unpkg.com/mini-parallax&quot;&gt;&lt;/script&gt;</code>
-</code></pre>
-<p><code>MiniParallax</code> is global object containing <code>NormalParallax</code> and <code>BackgroundParallax</code>.</p>
-<pre><code class="lang-js"><code class="source-code prettyprint">const { NormalParallax } = MiniParallax
-
-new NormalParallax(&apos;.js-parallax&apos;)</code>
 </code></pre>
 <h2 id="browsers-support">Browsers support</h2><table>
 <thead>

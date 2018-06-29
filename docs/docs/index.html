@@ -34,29 +34,31 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/ParallaxBase.js~ParallaxBase.html">ParallaxBase</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-onResize">onResize</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-onScroll">onScroll</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#lib">lib</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-noop">noop</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#lib">lib</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getElements">getElements</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-noop">noop</a></span></span></li>
 </ul>
 </div>
 </nav>
 
-<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="mini-parallax">mini-parallax</h1><p>Parallax library</p>
-<p>Less Features, Less Size</p>
-<h2 id="demo">Demo</h2><p><a href="https://codepen.io/ko-yelie/pen/vjaLRg">CodePen</a></p>
+<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="mini-parallax">mini-parallax</h1><p>Parallax library contains both normal parallax and background parallax.</p>
+<p>Written in vanilla JavaScript. It&apos;s lightweight.</p>
+<h2 id="demo">Demo</h2><ul>
+<li><a href="https://ko-yelie.github.io/mini-parallax/">GitHub Pages</a></li>
+<li><a href="https://codepen.io/ko-yelie/pen/vjaLRg">CodePen</a></li>
+</ul>
 <h2 id="installation">Installation</h2><h3 id="es-modules">ES Modules</h3><p><a href="https://www.npmjs.com/package/mini-parallax">npm</a></p>
 <pre><code class="lang-sh"><code class="source-code prettyprint">npm i mini-parallax</code>
 </code></pre>
 <pre><code class="lang-js"><code class="source-code prettyprint">import { NormalParallax, BackgroundParallax } from &apos;mini-parallax&apos;</code>
 </code></pre>
-<h3 id="cdn">CDN</h3><p><a href="https://unpkg.com/mini-parallax">unpkg</a> (3.7 KB)</p>
+<h3 id="cdn">CDN</h3><p><a href="https://unpkg.com/mini-parallax">unpkg</a> (3.6 KB)</p>
 <pre><code class="lang-html"><code class="source-code prettyprint">&lt;script src=&quot;https://unpkg.com/mini-parallax&quot;&gt;&lt;/script&gt;</code>
 </code></pre>
 <pre><code class="lang-js"><code class="source-code prettyprint">const { NormalParallax, BackgroundParallax } = MiniParallax</code>
 </code></pre>
 <p><code>MiniParallax</code> is global object containing <code>NormalParallax</code> and <code>BackgroundParallax</code> class.</p>
-<h2 id="usage">Usage</h2><h3 id="-code-normalparallax--code--class"><code>NormalParallax</code> class</h3><p><a href="https://ko-yelie.github.io/mini-parallax/class/src/NormalParallax.js~NormalParallax.html">Docs</a></p>
-<pre><code class="lang-js"><code class="source-code prettyprint">import { NormalParallax } from &apos;mini-parallax&apos;
-
-new NormalParallax(&apos;.js-parallax&apos;, {
+<h2 id="usage">Usage</h2><h3 id="-code-normalparallax--code--class"><code>NormalParallax</code> class</h3><p><a href="https://ko-yelie.github.io/mini-parallax/docs/class/src/NormalParallax.js~NormalParallax.html">Docs</a></p>
+<pre><code class="lang-js"><code class="source-code prettyprint">new NormalParallax(&apos;.js-parallax&apos;, {
   speed: 0.03
 })</code>
 </code></pre>
@@ -80,10 +82,8 @@ window.addEventListener(&apos;load&apos;, () =&gt; {
 })</code>
 </code></pre>
 <h3 id="-code-backgroundparallax--code--class"><code>BackgroundParallax</code> class</h3><p>It automatically calculates the position of the background element from the height of the parent element and the background element.</p>
-<p><a href="https://ko-yelie.github.io/mini-parallax/class/src/BackgroundParallax.js~BackgroundParallax.html">Docs</a></p>
-<pre><code class="lang-js"><code class="source-code prettyprint">import { BackgroundParallax } from &apos;mini-parallax&apos;
-
-new BackgroundParallax(&apos;.js-background-parallax&apos;)</code>
+<p><a href="https://ko-yelie.github.io/mini-parallax/docs/class/src/BackgroundParallax.js~BackgroundParallax.html">Docs</a></p>
+<pre><code class="lang-js"><code class="source-code prettyprint">new BackgroundParallax(&apos;.js-background-parallax&apos;)</code>
 </code></pre>
 <pre><code class="lang-html"><code class="source-code prettyprint">&lt;div class=&quot;parent&quot;&gt;
   &lt;div class=&quot;js-background-parallax&quot;&gt;&lt;/div&gt;

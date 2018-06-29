@@ -18,6 +18,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "mini-parallax/src/lib/utility.js~getelements",
+    "function/index.html#static-function-getElements",
+    "<span>getElements</span> <span class=\"search-result-import-path\">mini-parallax/src/lib/utility.js</span>",
+    "function"
+  ],
+  [
     "mini-parallax/src/lib/utility.js~noop",
     "function/index.html#static-function-noop",
     "<span>noop</span> <span class=\"search-result-import-path\">mini-parallax/src/lib/utility.js</span>",

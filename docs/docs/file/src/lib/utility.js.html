@@ -34,13 +34,50 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/ParallaxBase.js~ParallaxBase.html">ParallaxBase</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-onResize">onResize</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-onScroll">onScroll</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#lib">lib</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-noop">noop</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#lib">lib</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getElements">getElements</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-noop">noop</a></span></span></li>
 </ul>
 </div>
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/lib/utility.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">export function noop () {}
+
+/**
+ * Convert NodeList to array
+ *
+ * @param {NodeList} nodeList NodeList
+ * @return {NodeList[]} array of NodeList
+ */
+function convertIntoArray (nodeList) {
+  return nodeList ? Array.prototype.slice.call(nodeList, 0) : []
+}
+
+/**
+ * Get elements that can use forEach
+ *
+ * @param {string|NodeList|Element|Element[]} target - selector or elements
+ * @param {Element} context - context element
+ * @return {Element[]} array of elements
+ */
+export function getElements (target, context = document) {
+  if (typeof target === &apos;string&apos;) {
+    // string
+    const nodeList = context.querySelectorAll(target)
+    return convertIntoArray(nodeList)
+  } else if (target.length) {
+    if (target.map) {
+      // Array
+      return target
+    } else {
+      // NodeList
+      return convertIntoArray(target)
+    }
+  } else {
+    // Element
+    return [target]
+  }
+}
 </code></pre>
 
 </div>

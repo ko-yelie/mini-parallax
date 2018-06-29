@@ -84,7 +84,7 @@ export default class NormalParallax extends ParallaxBase {
       // After the element can be seen from below
       const position =
         (item.center - this._centerViewport) * item.speed
-      item.el.style.transform = this[this._getTransformValueFuncName](position)
+      item.el.style.transform = this[this._fTansform](position)
     }
   }
 }

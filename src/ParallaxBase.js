@@ -24,7 +24,7 @@ export default class ParallaxBase {
     this._els = getElements(target)
     this._onResize = onResize
     this._onScroll = onScroll
-    this._getTransformValueFuncName = `_getTransformValue${isRound ? 'Round' : ''}`
+    this._fTansform = `_getTransform${isRound ? 'Round' : ''}`
     this._scrollTarget = document.scrollingElement || document.documentElement
 
     window.addEventListener('resize', () => {
@@ -97,7 +97,7 @@ export default class ParallaxBase {
   /**
    * Return the value of transform
    */
-  _getTransformValue (position) {
+  _getTransform (position) {
     return `translate3d(0, ${position}px, 0)`
   }
 
@@ -105,7 +105,7 @@ export default class ParallaxBase {
    * Return the value of transform
    * In order to avoid problems such as bleeding, convert the number to an integers
    */
-  _getTransformValueRound (position) {
+  _getTransformRound (position) {
     return `translate3d(0, ${Math.round(position)}px, 0)`
   }
 }

@@ -1,11 +1,12 @@
 # mini-parallax
-Parallax library
+Parallax library contains both normal parallax and background parallax.
 
-Less Features, Less Size
+Written in vanilla JavaScript. It's lightweight.
 
 ## Demo
 
-[CodePen](https://codepen.io/ko-yelie/pen/vjaLRg)
+- [GitHub Pages](https://ko-yelie.github.io/mini-parallax/)
+- [CodePen](https://codepen.io/ko-yelie/pen/vjaLRg)
 
 ## Installation
 
@@ -23,7 +24,7 @@ import { NormalParallax, BackgroundParallax } from 'mini-parallax'
 
 ### CDN
 
-[unpkg](https://unpkg.com/mini-parallax) (3.7 KB)
+[unpkg](https://unpkg.com/mini-parallax) (3.6 KB)
 
 ```html
 <script src="https://unpkg.com/mini-parallax"></script>
@@ -42,8 +43,6 @@ const { NormalParallax, BackgroundParallax } = MiniParallax
 [Docs](https://ko-yelie.github.io/mini-parallax/docs/class/src/NormalParallax.js~NormalParallax.html)
 
 ```js
-import { NormalParallax } from 'mini-parallax'
-
 new NormalParallax('.js-parallax', {
   speed: 0.03
 })
@@ -83,8 +82,6 @@ It automatically calculates the position of the background element from the heig
 [Docs](https://ko-yelie.github.io/mini-parallax/docs/class/src/BackgroundParallax.js~BackgroundParallax.html)
 
 ```js
-import { BackgroundParallax } from 'mini-parallax'
-
 new BackgroundParallax('.js-background-parallax')
 ```
 

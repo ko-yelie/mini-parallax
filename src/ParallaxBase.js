@@ -1,5 +1,4 @@
-import { noop } from './lib/utility'
-import getElements from 'get-elements-array'
+import { noop, getElements } from './lib/utility'
 
 /**
  * Base function for parallax

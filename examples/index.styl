@@ -1,0 +1,85 @@
+body
+  position relative
+  height 1500px
+
+p
+  margin 1em
+  line-height 1.5
+
+// NormalParallax
+.box
+  display flex
+  justify-content center
+  align-items center
+  position absolute
+  z-index 2
+  width 200px
+  height 100px
+  background-color #eee
+  box-shadow rgba(#000, 0.3) 2px 2px 4px
+  &.o-1
+    top 400px
+    left 50%
+    z-index 4
+    background-color darken(#eee, 10)
+  &.o-2
+    top 300px
+    left 30%
+    z-index 3
+    background-color darken(#eee, 20)
+  &.o-3
+    top 450px
+    left 10%
+    z-index 5
+  &.o-4
+    top 120px
+    left 60%
+    background-color darken(#eee, 30)
+  &.o-text
+    display block
+    top 900px
+    right 0
+    left 0
+    width 400px
+    height auto
+    margin auto
+    padding 2em
+
+// BackgroundParallax
+.background
+  image-width = 800
+
+  overflow hidden
+  position absolute
+  right 0
+  left 0
+  width 100%
+  max-width image-width px
+  margin auto
+
+  img
+    position absolute
+    top 0
+    left 50%
+    width image-width px
+    margin-left -(image-width / 2)px
+
+  &.o-1
+    box-height = 300
+    image-height = 533
+
+    top 200px
+    height box-height px
+
+    img
+      margin-top (((box-height - image-height) / 2) / image-width) * 100%
+
+  &.o-2
+    box-height = 800
+    image-height = 1203
+
+    bottom 0
+    height box-height px
+
+    img
+      margin-top (((box-height - image-height) / 2) / image-width) * 100%

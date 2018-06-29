@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl">
+  <title data-ice="title">Home | mini-parallax</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="Parallax library"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="mini-parallax"><meta property="twitter:description" content="Parallax library"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a href="https://ko-yelie@github.com/ko-yelie/mini-parallax.git">Repository</a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/BackgroundParallax.js~BackgroundParallax.html">BackgroundParallax</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/NormalParallax.js~NormalParallax.html">NormalParallax</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/ParallaxBase.js~ParallaxBase.html">ParallaxBase</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-onResize">onResize</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-onScroll">onScroll</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#lib">lib</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-noop">noop</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="mini-parallax">mini-parallax</h1><p>Parallax library</p>
+<p>Less Features, Less Size</p>
+<h2 id="demo">Demo</h2><p><a href="https://codepen.io/ko-yelie/pen/vjaLRg">CodePen</a></p>
+<h2 id="installation">Installation</h2><h3 id="es-modules">ES Modules</h3><p><a href="https://www.npmjs.com/package/mini-parallax">npm</a></p>
+<pre><code class="lang-sh"><code class="source-code prettyprint">npm i mini-parallax</code>
+</code></pre>
+<pre><code class="lang-js"><code class="source-code prettyprint">import { NormalParallax, BackgroundParallax } from &apos;mini-parallax&apos;</code>
+</code></pre>
+<h3 id="cdn">CDN</h3><p><a href="https://unpkg.com/mini-parallax">unpkg</a> (3.7 KB)</p>
+<pre><code class="lang-html"><code class="source-code prettyprint">&lt;script src=&quot;https://unpkg.com/mini-parallax&quot;&gt;&lt;/script&gt;</code>
+</code></pre>
+<pre><code class="lang-js"><code class="source-code prettyprint">const { NormalParallax, BackgroundParallax } = MiniParallax</code>
+</code></pre>
+<p><code>MiniParallax</code> is global object containing <code>NormalParallax</code> and <code>BackgroundParallax</code> class.</p>
+<h2 id="usage">Usage</h2><h3 id="-code-normalparallax--code--class"><code>NormalParallax</code> class</h3><p><a href="https://ko-yelie.github.io/mini-parallax/class/src/NormalParallax.js~NormalParallax.html">Docs</a></p>
+<pre><code class="lang-js"><code class="source-code prettyprint">import { NormalParallax } from &apos;mini-parallax&apos;
+
+new NormalParallax(&apos;.js-parallax&apos;, {
+  speed: 0.03
+})</code>
+</code></pre>
+<pre><code class="lang-html"><code class="source-code prettyprint">&lt;div class=&quot;js-parallax&quot;&gt;&lt;/div&gt;
+
+&lt;!-- Set speed only for this element --&gt;
+&lt;div class=&quot;js-parallax&quot; data-speed=&quot;0.05&quot;&gt;&lt;/div&gt;</code>
+</code></pre>
+<p>If you disable <code>autoRun</code>, run it at any time you like.</p>
+<pre><code class="lang-js"><code class="source-code prettyprint">const parallax = new NormalParallax(&apos;.js-parallax&apos;, {
+  autoRun: false
+})
+
+window.addEventListener(&apos;load&apos;, () =&gt; {
+  parallax.run()
+})</code>
+</code></pre>
+<p>If the text is in the parallax element, it will blur, so set the <code>isRound</code> option to <code>true</code>.</p>
+<pre><code class="lang-js"><code class="source-code prettyprint">new NormalParallax(&apos;.js-parallax&apos;, {
+  isRound: true
+})</code>
+</code></pre>
+<h3 id="-code-backgroundparallax--code--class"><code>BackgroundParallax</code> class</h3><p>It automatically calculates the position of the background element from the height of the parent element and the background element.</p>
+<p><a href="https://ko-yelie.github.io/mini-parallax/class/src/BackgroundParallax.js~BackgroundParallax.html">Docs</a></p>
+<pre><code class="lang-js"><code class="source-code prettyprint">import { BackgroundParallax } from &apos;mini-parallax&apos;
+
+new BackgroundParallax(&apos;.js-background-parallax&apos;)</code>
+</code></pre>
+<pre><code class="lang-html"><code class="source-code prettyprint">&lt;div class=&quot;parent&quot;&gt;
+  &lt;div class=&quot;js-background-parallax&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;</code>
+</code></pre>
+<h2 id="browsers-support">Browsers support</h2><table>
+<thead>
+<tr>
+<th><a href="http://godban.github.io/browsers-support-badges/"><img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" width="24px" height="24px"></a><br>IE / Edge</th>
+<th><a href="http://godban.github.io/browsers-support-badges/"><img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" width="24px" height="24px"></a><br>Firefox</th>
+<th><a href="http://godban.github.io/browsers-support-badges/"><img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" width="24px" height="24px"></a><br>Chrome</th>
+<th><a href="http://godban.github.io/browsers-support-badges/"><img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" width="24px" height="24px"></a><br>Safari</th>
+<th><a href="http://godban.github.io/browsers-support-badges/"><img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari-ios/safari-ios_48x48.png" width="24px" height="24px"></a><br>iOS Safari</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IE11, Edge</td>
+<td>last version</td>
+<td>last version</td>
+<td>last version</td>
+<td>last version</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>If you want more features, please consider other parallax libraries.</p>
+<ul>
+<li><a href="https://github.com/dixonandmoe/rellax">Rellax</a></li>
+<li><a href="https://github.com/baptistebriel/smooth-scrolling">smooth</a></li>
+</ul>
+</div>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

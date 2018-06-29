@@ -11,7 +11,9 @@
   "scripts": {
     "build": "bili",
     "docs": "esdoc",
-    "examples": "parcel examples/index.pug --out-dir examples-dist  --open"
+    "examples": "parcel examples/index.pug -d examples-dist --open",
+    "examples:prod": "parcel build examples/index.pug --no-source-maps -d docs --public-url /mini-parallax/",
+    "pages": "npm run docs && npm run examples:prod"
   },
   "repository": {
     "type": "git",

@@ -91,7 +91,7 @@ export default class BackgroundParallax extends ParallaxBase {
         const rate = diff / item.distance
         const position = item.offset + item.max - item.max * rate // max - (max - min) * rate
 
-        item.el.style.transform = this[this._getTransformValueFuncName](position)
+        item.el.style.transform = this[this._fTansform](position)
       }
     }
   }

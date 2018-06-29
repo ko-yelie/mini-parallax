@@ -39,7 +39,7 @@ const { NormalParallax, BackgroundParallax } = MiniParallax
 
 ### `NormalParallax` class
 
-[Docs](https://ko-yelie.github.io/mini-parallax/class/src/NormalParallax.js~NormalParallax.html)
+[Docs](https://ko-yelie.github.io/mini-parallax/docs/class/src/NormalParallax.js~NormalParallax.html)
 
 ```js
 import { NormalParallax } from 'mini-parallax'
@@ -80,7 +80,7 @@ new NormalParallax('.js-parallax', {
 
 It automatically calculates the position of the background element from the height of the parent element and the background element.
 
-[Docs](https://ko-yelie.github.io/mini-parallax/class/src/BackgroundParallax.js~BackgroundParallax.html)
+[Docs](https://ko-yelie.github.io/mini-parallax/docs/class/src/BackgroundParallax.js~BackgroundParallax.html)
 
 ```js
 import { BackgroundParallax } from 'mini-parallax'

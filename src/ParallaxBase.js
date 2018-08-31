@@ -13,6 +13,12 @@ export default class ParallaxBase {
    * @param {boolean} [options.autoRun=true] - Whether to run automatically
    */
   constructor (target, options = {}) {
+    this._els = getElements(target)
+    if (this._els.length === 0) {
+      this._disabled = true
+      return
+    }
+
     const {
       onResize = noop,
       onScroll = noop,
@@ -20,7 +26,6 @@ export default class ParallaxBase {
       autoRun = true
     } = options
 
-    this._els = getElements(target)
     this._onResize = onResize
     this._onScroll = onScroll
     this._fTansform = `_getTransform${isRound ? 'Round' : ''}`
@@ -41,6 +46,8 @@ export default class ParallaxBase {
    * Run animation
    */
   run () {
+    if (this._disabled) return
+
     this._cache()
     requestAnimationFrame(() => { this._tick() })
   }
@@ -49,6 +56,8 @@ export default class ParallaxBase {
    * Update cache and position
    */
   update () {
+    if (this._disabled) return
+
     this._cache()
     this._update()
   }

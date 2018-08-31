@@ -1089,7 +1089,7 @@
     "__docId__": 67,
     "kind": "file",
     "name": "src/ParallaxBase.js",
-    "content": "import { noop, getElements } from './lib/utility'\n\n/**\n * Base function for parallax\n */\nexport default class ParallaxBase {\n  /**\n   * @param {string|NodeList|Element|Element[]} target - Target elements (selector or element object)\n   * @param {Object} [options={}]\n   * @param {onResize} [options.onResize=noop] - Resize event handler\n   * @param {onScroll} [options.onScroll=noop] - Scroll event handler\n   * @param {boolean} [options.isRound=false] - Whether transform style value is rounded or not\n   * @param {boolean} [options.autoRun=true] - Whether to run automatically\n   */\n  constructor (target, options = {}) {\n    const {\n      onResize = noop,\n      onScroll = noop,\n      isRound = false,\n      autoRun = true\n    } = options\n\n    this._els = getElements(target)\n    this._onResize = onResize\n    this._onScroll = onScroll\n    this._fTansform = `_getTransform${isRound ? 'Round' : ''}`\n    this._scrollTarget = document.scrollingElement || document.documentElement\n\n    window.addEventListener('resize', () => {\n      this.update()\n      this._onResize(this._windowHeight)\n    })\n    window.addEventListener('load', () => {\n      this.update()\n    })\n\n    autoRun && this.run()\n  }\n\n  /**\n   * Run animation\n   */\n  run () {\n    this._cache()\n    requestAnimationFrame(() => { this._tick() })\n  }\n\n  /**\n   * Update cache and position\n   */\n  update () {\n    this._cache()\n    this._update()\n  }\n\n  /**\n   * Cache various values\n   */\n  _cache () {\n    this._windowHeight = window.innerHeight\n    const scrollY = window.scrollY || window.pageYOffset\n\n    this._items = this._els\n      .map(el => {\n        el.style.transform = 'none'\n        el.style.willChange = 'transform'\n\n        return this._cacheElementPos(el, scrollY)\n      })\n      .filter(item => item)\n  }\n\n  /**\n   * Each frame of animation\n   */\n  _tick () {\n    const scrollTop = this._scrollTarget.scrollTop\n    if (scrollTop !== this._scrollTop) {\n      // When the scroll position changes\n      this._scrollTop = scrollTop\n      this._update()\n    }\n\n    requestAnimationFrame(() => { this._tick() })\n  }\n\n  /**\n   * Update the position of each element\n   */\n  _update () {\n    this._items.forEach(item => this._updateElement(item))\n\n    this._onScroll(this._scrollTop)\n  }\n\n  /**\n   * Return the value of transform\n   */\n  _getTransform (position) {\n    return `translate3d(0, ${position}px, 0)`\n  }\n\n  /**\n   * Return the value of transform\n   * In order to avoid problems such as bleeding, convert the number to an integers\n   */\n  _getTransformRound (position) {\n    return `translate3d(0, ${Math.round(position)}px, 0)`\n  }\n}\n\n/**\n * @typedef {function} onResize\n * @param {number} windowHeight - `window.innerHeight`\n */\n\n/**\n * @typedef {function} onScroll\n * @param {number} scrollTop - `document.scrollingElement.scrollTop`\n */\n",
+    "content": "import { noop, getElements } from './lib/utility'\n\n/**\n * Base function for parallax\n */\nexport default class ParallaxBase {\n  /**\n   * @param {string|NodeList|Element|Element[]} target - Target elements (selector or element object)\n   * @param {Object} [options={}]\n   * @param {onResize} [options.onResize=noop] - Resize event handler\n   * @param {onScroll} [options.onScroll=noop] - Scroll event handler\n   * @param {boolean} [options.isRound=false] - Whether transform style value is rounded or not\n   * @param {boolean} [options.autoRun=true] - Whether to run automatically\n   */\n  constructor (target, options = {}) {\n    this._els = getElements(target)\n    if (this._els.length === 0) {\n      this._disabled = true\n      return\n    }\n\n    const {\n      onResize = noop,\n      onScroll = noop,\n      isRound = false,\n      autoRun = true\n    } = options\n\n    this._onResize = onResize\n    this._onScroll = onScroll\n    this._fTansform = `_getTransform${isRound ? 'Round' : ''}`\n    this._scrollTarget = document.scrollingElement || document.documentElement\n\n    window.addEventListener('resize', () => {\n      this.update()\n      this._onResize(this._windowHeight)\n    })\n    window.addEventListener('load', () => {\n      this.update()\n    })\n\n    autoRun && this.run()\n  }\n\n  /**\n   * Run animation\n   */\n  run () {\n    if (this._disabled) return\n\n    this._cache()\n    requestAnimationFrame(() => { this._tick() })\n  }\n\n  /**\n   * Update cache and position\n   */\n  update () {\n    if (this._disabled) return\n\n    this._cache()\n    this._update()\n  }\n\n  /**\n   * Cache various values\n   */\n  _cache () {\n    this._windowHeight = window.innerHeight\n    const scrollY = window.scrollY || window.pageYOffset\n\n    this._items = this._els\n      .map(el => {\n        el.style.transform = 'none'\n        el.style.willChange = 'transform'\n\n        return this._cacheElementPos(el, scrollY)\n      })\n      .filter(item => item)\n  }\n\n  /**\n   * Each frame of animation\n   */\n  _tick () {\n    const scrollTop = this._scrollTarget.scrollTop\n    if (scrollTop !== this._scrollTop) {\n      // When the scroll position changes\n      this._scrollTop = scrollTop\n      this._update()\n    }\n\n    requestAnimationFrame(() => { this._tick() })\n  }\n\n  /**\n   * Update the position of each element\n   */\n  _update () {\n    this._items.forEach(item => this._updateElement(item))\n\n    this._onScroll(this._scrollTop)\n  }\n\n  /**\n   * Return the value of transform\n   */\n  _getTransform (position) {\n    return `translate3d(0, ${position}px, 0)`\n  }\n\n  /**\n   * Return the value of transform\n   * In order to avoid problems such as bleeding, convert the number to an integers\n   */\n  _getTransformRound (position) {\n    return `translate3d(0, ${Math.round(position)}px, 0)`\n  }\n}\n\n/**\n * @typedef {function} onResize\n * @param {number} windowHeight - `window.innerHeight`\n */\n\n/**\n * @typedef {function} onScroll\n * @param {number} scrollTop - `document.scrollingElement.scrollTop`\n */\n",
     "static": true,
     "longname": "/Users/koya.iwasaki/web/mini-parallax/src/ParallaxBase.js",
     "access": "public",
@@ -1266,7 +1266,7 @@
     "longname": "src/ParallaxBase.js~ParallaxBase#_els",
     "access": "private",
     "description": null,
-    "lineNumber": 23,
+    "lineNumber": 16,
     "undocument": true,
     "ignore": true,
     "type": {
@@ -1278,31 +1278,31 @@
   {
     "__docId__": 73,
     "kind": "member",
-    "name": "_onResize",
+    "name": "_disabled",
     "memberof": "src/ParallaxBase.js~ParallaxBase",
     "static": false,
-    "longname": "src/ParallaxBase.js~ParallaxBase#_onResize",
+    "longname": "src/ParallaxBase.js~ParallaxBase#_disabled",
     "access": "private",
     "description": null,
-    "lineNumber": 24,
+    "lineNumber": 18,
     "undocument": true,
     "ignore": true,
     "type": {
       "types": [
-        "*"
+        "boolean"
       ]
     }
   },
   {
     "__docId__": 74,
     "kind": "member",
-    "name": "_onScroll",
+    "name": "_onResize",
     "memberof": "src/ParallaxBase.js~ParallaxBase",
     "static": false,
-    "longname": "src/ParallaxBase.js~ParallaxBase#_onScroll",
+    "longname": "src/ParallaxBase.js~ParallaxBase#_onResize",
     "access": "private",
     "description": null,
-    "lineNumber": 25,
+    "lineNumber": 29,
     "undocument": true,
     "ignore": true,
     "type": {
@@ -1314,13 +1314,31 @@
   {
     "__docId__": 75,
     "kind": "member",
+    "name": "_onScroll",
+    "memberof": "src/ParallaxBase.js~ParallaxBase",
+    "static": false,
+    "longname": "src/ParallaxBase.js~ParallaxBase#_onScroll",
+    "access": "private",
+    "description": null,
+    "lineNumber": 30,
+    "undocument": true,
+    "ignore": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 76,
+    "kind": "member",
     "name": "_fTansform",
     "memberof": "src/ParallaxBase.js~ParallaxBase",
     "static": false,
     "longname": "src/ParallaxBase.js~ParallaxBase#_fTansform",
     "access": "private",
     "description": null,
-    "lineNumber": 26,
+    "lineNumber": 31,
     "undocument": true,
     "ignore": true,
     "type": {
@@ -1330,7 +1348,7 @@
     }
   },
   {
-    "__docId__": 76,
+    "__docId__": 77,
     "kind": "member",
     "name": "_scrollTarget",
     "memberof": "src/ParallaxBase.js~ParallaxBase",
@@ -1338,7 +1356,7 @@
     "longname": "src/ParallaxBase.js~ParallaxBase#_scrollTarget",
     "access": "private",
     "description": null,
-    "lineNumber": 27,
+    "lineNumber": 32,
     "undocument": true,
     "ignore": true,
     "type": {
@@ -1348,7 +1366,7 @@
     }
   },
   {
-    "__docId__": 77,
+    "__docId__": 78,
     "kind": "method",
     "name": "run",
     "memberof": "src/ParallaxBase.js~ParallaxBase",
@@ -1358,12 +1376,12 @@
     "longname": "src/ParallaxBase.js~ParallaxBase#run",
     "access": "public",
     "description": "Run animation",
-    "lineNumber": 43,
+    "lineNumber": 48,
     "params": [],
     "return": null
   },
   {
-    "__docId__": 78,
+    "__docId__": 79,
     "kind": "method",
     "name": "update",
     "memberof": "src/ParallaxBase.js~ParallaxBase",
@@ -1373,12 +1391,12 @@
     "longname": "src/ParallaxBase.js~ParallaxBase#update",
     "access": "public",
     "description": "Update cache and position",
-    "lineNumber": 51,
+    "lineNumber": 58,
     "params": [],
     "return": null
   },
   {
-    "__docId__": 79,
+    "__docId__": 80,
     "kind": "method",
     "name": "_cache",
     "memberof": "src/ParallaxBase.js~ParallaxBase",
@@ -1388,13 +1406,13 @@
     "longname": "src/ParallaxBase.js~ParallaxBase#_cache",
     "access": "private",
     "description": "Cache various values",
-    "lineNumber": 59,
+    "lineNumber": 68,
     "ignore": true,
     "params": [],
     "return": null
   },
   {
-    "__docId__": 80,
+    "__docId__": 81,
     "kind": "member",
     "name": "_windowHeight",
     "memberof": "src/ParallaxBase.js~ParallaxBase",
@@ -1402,25 +1420,7 @@
     "longname": "src/ParallaxBase.js~ParallaxBase#_windowHeight",
     "access": "private",
     "description": null,
-    "lineNumber": 60,
-    "undocument": true,
-    "ignore": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 81,
-    "kind": "member",
-    "name": "_items",
-    "memberof": "src/ParallaxBase.js~ParallaxBase",
-    "static": false,
-    "longname": "src/ParallaxBase.js~ParallaxBase#_items",
-    "access": "private",
-    "description": null,
-    "lineNumber": 63,
+    "lineNumber": 69,
     "undocument": true,
     "ignore": true,
     "type": {
@@ -1431,30 +1431,14 @@
   },
   {
     "__docId__": 82,
-    "kind": "method",
-    "name": "_tick",
-    "memberof": "src/ParallaxBase.js~ParallaxBase",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/ParallaxBase.js~ParallaxBase#_tick",
-    "access": "private",
-    "description": "Each frame of animation",
-    "lineNumber": 76,
-    "ignore": true,
-    "params": [],
-    "return": null
-  },
-  {
-    "__docId__": 83,
     "kind": "member",
-    "name": "_scrollTop",
+    "name": "_items",
     "memberof": "src/ParallaxBase.js~ParallaxBase",
     "static": false,
-    "longname": "src/ParallaxBase.js~ParallaxBase#_scrollTop",
+    "longname": "src/ParallaxBase.js~ParallaxBase#_items",
     "access": "private",
     "description": null,
-    "lineNumber": 80,
+    "lineNumber": 72,
     "undocument": true,
     "ignore": true,
     "type": {
@@ -1464,7 +1448,41 @@
     }
   },
   {
+    "__docId__": 83,
+    "kind": "method",
+    "name": "_tick",
+    "memberof": "src/ParallaxBase.js~ParallaxBase",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/ParallaxBase.js~ParallaxBase#_tick",
+    "access": "private",
+    "description": "Each frame of animation",
+    "lineNumber": 85,
+    "ignore": true,
+    "params": [],
+    "return": null
+  },
+  {
     "__docId__": 84,
+    "kind": "member",
+    "name": "_scrollTop",
+    "memberof": "src/ParallaxBase.js~ParallaxBase",
+    "static": false,
+    "longname": "src/ParallaxBase.js~ParallaxBase#_scrollTop",
+    "access": "private",
+    "description": null,
+    "lineNumber": 89,
+    "undocument": true,
+    "ignore": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 85,
     "kind": "method",
     "name": "_update",
     "memberof": "src/ParallaxBase.js~ParallaxBase",
@@ -1474,13 +1492,13 @@
     "longname": "src/ParallaxBase.js~ParallaxBase#_update",
     "access": "private",
     "description": "Update the position of each element",
-    "lineNumber": 90,
+    "lineNumber": 99,
     "ignore": true,
     "params": [],
     "return": null
   },
   {
-    "__docId__": 85,
+    "__docId__": 86,
     "kind": "method",
     "name": "_getTransform",
     "memberof": "src/ParallaxBase.js~ParallaxBase",
@@ -1490,34 +1508,7 @@
     "longname": "src/ParallaxBase.js~ParallaxBase#_getTransform",
     "access": "private",
     "description": "Return the value of transform",
-    "lineNumber": 99,
-    "ignore": true,
-    "params": [
-      {
-        "name": "position",
-        "types": [
-          "*"
-        ]
-      }
-    ],
-    "return": {
-      "types": [
-        "string"
-      ]
-    }
-  },
-  {
-    "__docId__": 86,
-    "kind": "method",
-    "name": "_getTransformRound",
-    "memberof": "src/ParallaxBase.js~ParallaxBase",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/ParallaxBase.js~ParallaxBase#_getTransformRound",
-    "access": "private",
-    "description": "Return the value of transform\nIn order to avoid problems such as bleeding, convert the number to an integers",
-    "lineNumber": 107,
+    "lineNumber": 108,
     "ignore": true,
     "params": [
       {
@@ -1535,6 +1526,33 @@
   },
   {
     "__docId__": 87,
+    "kind": "method",
+    "name": "_getTransformRound",
+    "memberof": "src/ParallaxBase.js~ParallaxBase",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/ParallaxBase.js~ParallaxBase#_getTransformRound",
+    "access": "private",
+    "description": "Return the value of transform\nIn order to avoid problems such as bleeding, convert the number to an integers",
+    "lineNumber": 116,
+    "ignore": true,
+    "params": [
+      {
+        "name": "position",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "string"
+      ]
+    }
+  },
+  {
+    "__docId__": 88,
     "kind": "file",
     "name": "src/index.js",
     "content": "export { default as NormalParallax } from './NormalParallax'\nexport { default as BackgroundParallax } from './BackgroundParallax'\n",
@@ -1545,7 +1563,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 88,
+    "__docId__": 89,
     "kind": "file",
     "name": "src/lib/utility.js",
     "content": "export function noop () {}\n\n/**\n * Convert NodeList to array\n *\n * @param {NodeList} nodeList NodeList\n * @return {NodeList[]} array of NodeList\n */\nfunction convertIntoArray (nodeList) {\n  return nodeList ? Array.prototype.slice.call(nodeList, 0) : []\n}\n\n/**\n * Get elements that can use forEach\n *\n * @param {string|NodeList|Element|Element[]} target - selector or elements\n * @param {Element} context - context element\n * @return {Element[]} array of elements\n */\nexport function getElements (target, context = document) {\n  if (typeof target === 'string') {\n    // string\n    const nodeList = context.querySelectorAll(target)\n    return convertIntoArray(nodeList)\n  } else if (target.length) {\n    if (target.map) {\n      // Array\n      return target\n    } else {\n      // NodeList\n      return convertIntoArray(target)\n    }\n  } else {\n    // Element\n    return [target]\n  }\n}\n",
@@ -1556,7 +1574,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 89,
+    "__docId__": 90,
     "kind": "function",
     "name": "noop",
     "memberof": "src/lib/utility.js",
@@ -1575,7 +1593,7 @@
     "return": null
   },
   {
-    "__docId__": 90,
+    "__docId__": 91,
     "kind": "function",
     "name": "convertIntoArray",
     "memberof": "src/lib/utility.js",
@@ -1612,7 +1630,7 @@
     "ignore": true
   },
   {
-    "__docId__": 91,
+    "__docId__": 92,
     "kind": "function",
     "name": "getElements",
     "memberof": "src/lib/utility.js",
@@ -1670,7 +1688,7 @@
   },
   {
     "kind": "packageJSON",
-    "content": "{\n  \"name\": \"mini-parallax\",\n  \"moduleName\": \"MiniParallax\",\n  \"version\": \"0.2.11\",\n  \"description\": \"Parallax library\",\n  \"main\": \"dist/mini-parallax.es.js\",\n  \"unpkg\": \"dist/mini-parallax.iife.min.js\",\n  \"files\": [\n    \"dist/\"\n  ],\n  \"scripts\": {\n    \"build\": \"bili\",\n    \"docs\": \"esdoc\",\n    \"examples\": \"parcel examples/index.pug -d examples-dist --open\",\n    \"examples:prod\": \"parcel build examples/index.pug --no-source-maps -d docs --public-url /mini-parallax/\",\n    \"pages\": \"npm run docs && npm run examples:prod\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://ko-yelie@github.com/ko-yelie/mini-parallax.git\"\n  },\n  \"keywords\": [\n    \"parallax\",\n    \"background\",\n    \"es2015\"\n  ],\n  \"author\": \"Ko.Yelie\",\n  \"license\": \"MIT\",\n  \"year\": 2018,\n  \"bugs\": {\n    \"url\": \"https://github.com/ko-yelie/mini-parallax/issues\"\n  },\n  \"homepage\": \"https://github.com/ko-yelie/mini-parallax#readme\",\n  \"devDependencies\": {\n    \"banner-package\": \"^0.1.0\",\n    \"bili\": \"^3.0.15\",\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"parcel-bundler\": \"^1.9.3\",\n    \"pug\": \"^2.0.3\",\n    \"stylus\": \"^0.54.5\"\n  }\n}\n",
+    "content": "{\n  \"name\": \"mini-parallax\",\n  \"moduleName\": \"MiniParallax\",\n  \"version\": \"0.3.0\",\n  \"description\": \"Parallax library\",\n  \"main\": \"dist/mini-parallax.es.js\",\n  \"unpkg\": \"dist/mini-parallax.iife.min.js\",\n  \"files\": [\n    \"dist/\"\n  ],\n  \"scripts\": {\n    \"build\": \"bili\",\n    \"docs\": \"esdoc\",\n    \"examples\": \"parcel examples/index.pug -d examples-dist --open\",\n    \"examples:prod\": \"parcel build examples/index.pug --no-source-maps -d docs --public-url /mini-parallax/\",\n    \"pages\": \"npm run docs && npm run examples:prod\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://ko-yelie@github.com/ko-yelie/mini-parallax.git\"\n  },\n  \"keywords\": [\n    \"parallax\",\n    \"background\",\n    \"es2015\"\n  ],\n  \"author\": \"Ko.Yelie\",\n  \"license\": \"MIT\",\n  \"year\": 2018,\n  \"bugs\": {\n    \"url\": \"https://github.com/ko-yelie/mini-parallax/issues\"\n  },\n  \"homepage\": \"https://github.com/ko-yelie/mini-parallax#readme\",\n  \"devDependencies\": {\n    \"banner-package\": \"^0.1.0\",\n    \"bili\": \"^3.0.15\",\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"parcel-bundler\": \"^1.9.3\",\n    \"pug\": \"^2.0.3\",\n    \"stylus\": \"^0.54.5\"\n  }\n}\n",
     "longname": "/Users/koya.iwasaki/web/mini-parallax/package.json",
     "name": "package.json",
     "static": true,

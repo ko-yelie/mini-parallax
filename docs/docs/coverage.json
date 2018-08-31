@@ -1,6 +1,6 @@
 {
-  "coverage": "58.33%",
-  "expectCount": 36,
+  "coverage": "56.75%",
+  "expectCount": 37,
   "actualCount": 21,
   "files": {
     "src/BackgroundParallax.js": {
@@ -21,17 +21,18 @@
       ]
     },
     "src/ParallaxBase.js": {
-      "expectCount": 17,
+      "expectCount": 18,
       "actualCount": 9,
       "undocumentLines": [
-        23,
-        24,
-        25,
-        26,
-        27,
-        60,
-        63,
-        80
+        16,
+        18,
+        29,
+        30,
+        31,
+        32,
+        69,
+        72,
+        89
       ]
     },
     "src/lib/utility.js": {

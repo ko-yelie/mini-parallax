@@ -24,7 +24,7 @@ import { NormalParallax, BackgroundParallax } from 'mini-parallax'
 
 ### CDN
 
-[unpkg](https://unpkg.com/mini-parallax) (3.6 KB)
+[unpkg](https://unpkg.com/mini-parallax)
 
 ```html
 <script src="https://unpkg.com/mini-parallax"></script>

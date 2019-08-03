@@ -1,28 +1,11 @@
 {
-  "coverage": "56.75%",
-  "expectCount": 37,
-  "actualCount": 21,
+  "coverage": "45.61%",
+  "expectCount": 57,
+  "actualCount": 26,
   "files": {
     "src/BackgroundParallax.js": {
-      "expectCount": 4,
-      "actualCount": 4,
-      "undocumentLines": []
-    },
-    "src/NormalParallax.js": {
-      "expectCount": 12,
-      "actualCount": 6,
-      "undocumentLines": [
-        30,
-        31,
-        32,
-        41,
-        42,
-        72
-      ]
-    },
-    "src/ParallaxBase.js": {
-      "expectCount": 18,
-      "actualCount": 9,
+      "expectCount": 24,
+      "actualCount": 12,
       "undocumentLines": [
         16,
         18,
@@ -30,12 +13,39 @@
         30,
         31,
         32,
-        69,
-        72,
-        89
+        34,
+        40,
+        52,
+        55,
+        74,
+        78
       ]
     },
-    "src/lib/utility.js": {
+    "src/NormalParallax.js": {
+      "expectCount": 30,
+      "actualCount": 12,
+      "undocumentLines": [
+        19,
+        21,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        43,
+        49,
+        61,
+        62,
+        64,
+        67,
+        86,
+        90,
+        97
+      ]
+    },
+    "src/modules/utility.js": {
       "expectCount": 3,
       "actualCount": 2,
       "undocumentLines": [

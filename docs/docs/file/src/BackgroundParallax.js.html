@@ -31,22 +31,23 @@
     
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/BackgroundParallax.js~BackgroundParallax.html">BackgroundParallax</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/NormalParallax.js~NormalParallax.html">NormalParallax</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/ParallaxBase.js~ParallaxBase.html">ParallaxBase</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-onResize">onResize</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-onScroll">onScroll</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#lib">lib</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getElements">getElements</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-onResize">onResize</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-onScroll">onScroll</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules">modules</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getElements">getElements</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-noop">noop</a></span></span></li>
 </ul>
 </div>
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/BackgroundParallax.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import ParallaxBase from &apos;./ParallaxBase&apos;
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { noop, getElements } from &apos;./modules/utility&apos;
 
 /**
  * Automatically calculate the moving distance from the height of the parent element
  */
-export default class BackgroundParallax extends ParallaxBase {
+export default class BackgroundParallax {
   /**
    * @param {string|NodeList|Element|Element[]} target - Target elements (selector or element object)
    * @param {Object} [options={}]
@@ -55,8 +56,94 @@ export default class BackgroundParallax extends ParallaxBase {
    * @param {boolean} [options.isRound=false] - Whether transform style value is rounded or not
    * @param {boolean} [options.autoRun=true] - Whether to run automatically
    */
-  constructor (target, options) {
-    super(target, options)
+  constructor (target, options = {}) {
+    this._els = getElements(target)
+    if (this._els.length === 0) {
+      this._disabled = true
+      return
+    }
+
+    const {
+      onResize = noop,
+      onScroll = noop,
+      isRound = false,
+      autoRun = true
+    } = options
+
+    this._optionOnResize = onResize
+    this._optionOnScroll = onScroll
+    this._fTansform = `_getTransform${isRound ? &apos;Round&apos; : &apos;&apos;}`
+    this._scrollTarget = document.scrollingElement || document.documentElement
+
+    this._onResize = () =&gt; {
+      this.update()
+      this._optionOnResize(this._windowHeight)
+    }
+    window.addEventListener(&apos;resize&apos;, this._onResize)
+
+    this._onLoad = () =&gt; {
+      this.update()
+    }
+    window.addEventListener(&apos;load&apos;, this._onLoad)
+
+    autoRun &amp;&amp; this.run()
+  }
+
+  /**
+   * Cache various values
+   */
+  _cache () {
+    this._windowHeight = window.innerHeight
+    const scrollY = window.scrollY || window.pageYOffset
+
+    this._items = this._els
+      .map(el =&gt; {
+        el.style.transform = &apos;none&apos;
+        const willChange = window.getComputedStyle(el).willChange
+        el.style.willChange = &apos;transform&apos;
+        if (!(willChange === &apos;auto&apos; || willChange === &apos;transform&apos;)) el.style.willChange += &apos;, &apos; + willChange
+
+        return this._cacheElementPos(el, scrollY)
+      })
+      .filter(item =&gt; item)
+  }
+
+  /**
+   * Each frame of animation
+   */
+  _tick () {
+    const scrollTop = this._scrollTarget.scrollTop
+    if (scrollTop !== this._scrollTop) {
+      // When the scroll position changes
+      this._scrollTop = scrollTop
+      this._update()
+    }
+
+    this._animationFrameId = requestAnimationFrame(() =&gt; { this._tick() })
+  }
+
+  /**
+   * Update the position of each element
+   */
+  _update () {
+    this._items.forEach(item =&gt; this._updateElement(item))
+
+    this._optionOnScroll(this._scrollTop)
+  }
+
+  /**
+   * Return the value of transform
+   */
+  _getTransform (position) {
+    return `translate3d(0, ${position}px, 0)`
+  }
+
+  /**
+   * Return the value of transform
+   * In order to avoid problems such as bleeding, convert the number to an integers
+   */
+  _getTransformRound (position) {
+    return `translate3d(0, ${Math.round(position)}px, 0)`
   }
 
   /**
@@ -96,7 +183,54 @@ export default class BackgroundParallax extends ParallaxBase {
       }
     }
   }
+
+  /**
+   * Run animation
+   */
+  run () {
+    if (this._disabled) return
+
+    this._cache()
+    this._animationFrameId = requestAnimationFrame(() =&gt; { this._tick() })
+  }
+
+  /**
+   * Update cache and position
+   */
+  update () {
+    if (this._disabled) return
+
+    this._cache()
+    this._update()
+  }
+
+  /**
+   * Destroy instance
+   */
+  destroy () {
+    if (!this._els) return
+
+    cancelAnimationFrame(this._animationFrameId)
+
+    this._els.forEach(el =&gt; {
+      el.style.transform = null
+      el.style.willChange = null
+    })
+
+    window.removeEventListener(&apos;resize&apos;, this._onResize)
+    window.removeEventListener(&apos;load&apos;, this._onLoad)
+  }
 }
+
+/**
+ * @typedef {function} onResize
+ * @param {number} windowHeight - `window.innerHeight`
+ */
+
+/**
+ * @typedef {function} onScroll
+ * @param {number} scrollTop - `document.scrollingElement.scrollTop`
+ */
 </code></pre>
 
 </div>

@@ -12,21 +12,15 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "mini-parallax/src/parallaxbase.js~parallaxbase",
-    "class/src/ParallaxBase.js~ParallaxBase.html",
-    "<span>ParallaxBase</span> <span class=\"search-result-import-path\">mini-parallax/src/ParallaxBase.js</span>",
-    "class"
-  ],
-  [
-    "mini-parallax/src/lib/utility.js~getelements",
+    "mini-parallax/src/modules/utility.js~getelements",
     "function/index.html#static-function-getElements",
-    "<span>getElements</span> <span class=\"search-result-import-path\">mini-parallax/src/lib/utility.js</span>",
+    "<span>getElements</span> <span class=\"search-result-import-path\">mini-parallax/src/modules/utility.js</span>",
     "function"
   ],
   [
-    "mini-parallax/src/lib/utility.js~noop",
+    "mini-parallax/src/modules/utility.js~noop",
     "function/index.html#static-function-noop",
-    "<span>noop</span> <span class=\"search-result-import-path\">mini-parallax/src/lib/utility.js</span>",
+    "<span>noop</span> <span class=\"search-result-import-path\">mini-parallax/src/modules/utility.js</span>",
     "function"
   ],
   [
@@ -324,6 +318,36 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/backgroundparallax.js~backgroundparallax#destroy",
+    "class/src/BackgroundParallax.js~BackgroundParallax.html#instance-method-destroy",
+    "src/BackgroundParallax.js~BackgroundParallax#destroy",
+    "method"
+  ],
+  [
+    "src/backgroundparallax.js~backgroundparallax#run",
+    "class/src/BackgroundParallax.js~BackgroundParallax.html#instance-method-run",
+    "src/BackgroundParallax.js~BackgroundParallax#run",
+    "method"
+  ],
+  [
+    "src/backgroundparallax.js~backgroundparallax#update",
+    "class/src/BackgroundParallax.js~BackgroundParallax.html#instance-method-update",
+    "src/BackgroundParallax.js~BackgroundParallax#update",
+    "method"
+  ],
+  [
+    "src/backgroundparallax.js~onresize",
+    "typedef/index.html#static-typedef-onResize",
+    "src/BackgroundParallax.js~onResize",
+    "typedef"
+  ],
+  [
+    "src/backgroundparallax.js~onscroll",
+    "typedef/index.html#static-typedef-onScroll",
+    "src/BackgroundParallax.js~onScroll",
+    "typedef"
+  ],
+  [
     "src/normalparallax.js",
     "file/src/NormalParallax.js.html",
     "src/NormalParallax.js",
@@ -336,39 +360,33 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/parallaxbase.js",
-    "file/src/ParallaxBase.js.html",
-    "src/ParallaxBase.js",
-    "file"
-  ],
-  [
-    "src/parallaxbase.js~parallaxbase#constructor",
-    "class/src/ParallaxBase.js~ParallaxBase.html#instance-constructor-constructor",
-    "src/ParallaxBase.js~ParallaxBase#constructor",
+    "src/normalparallax.js~normalparallax#destroy",
+    "class/src/NormalParallax.js~NormalParallax.html#instance-method-destroy",
+    "src/NormalParallax.js~NormalParallax#destroy",
     "method"
   ],
   [
-    "src/parallaxbase.js~parallaxbase#run",
-    "class/src/ParallaxBase.js~ParallaxBase.html#instance-method-run",
-    "src/ParallaxBase.js~ParallaxBase#run",
+    "src/normalparallax.js~normalparallax#run",
+    "class/src/NormalParallax.js~NormalParallax.html#instance-method-run",
+    "src/NormalParallax.js~NormalParallax#run",
     "method"
   ],
   [
-    "src/parallaxbase.js~parallaxbase#update",
-    "class/src/ParallaxBase.js~ParallaxBase.html#instance-method-update",
-    "src/ParallaxBase.js~ParallaxBase#update",
+    "src/normalparallax.js~normalparallax#update",
+    "class/src/NormalParallax.js~NormalParallax.html#instance-method-update",
+    "src/NormalParallax.js~NormalParallax#update",
     "method"
   ],
   [
-    "src/parallaxbase.js~onresize",
+    "src/normalparallax.js~onresize",
     "typedef/index.html#static-typedef-onResize",
-    "src/ParallaxBase.js~onResize",
+    "src/NormalParallax.js~onResize",
     "typedef"
   ],
   [
-    "src/parallaxbase.js~onscroll",
+    "src/normalparallax.js~onscroll",
     "typedef/index.html#static-typedef-onScroll",
-    "src/ParallaxBase.js~onScroll",
+    "src/NormalParallax.js~onScroll",
     "typedef"
   ],
   [
@@ -378,9 +396,9 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "src/lib/utility.js",
-    "file/src/lib/utility.js.html",
-    "src/lib/utility.js",
+    "src/modules/utility.js",
+    "file/src/modules/utility.js.html",
+    "src/modules/utility.js",
     "file"
   ]
 ]

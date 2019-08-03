@@ -1,6 +1,11 @@
 module.exports = {
-  format: ['es', 'iife', 'iife-min'],
+  babel: {
+    minimal: true
+  },
   banner: require('banner-package'),
-  js: 'buble',
-  map: false
+  output: {
+    moduleName: 'MiniParallax',
+    format: ['es', 'iife', 'iife-min'],
+    sourceMap: false
+  }
 }
